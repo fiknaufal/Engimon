@@ -15,7 +15,7 @@ private:
     string elements[2];
     string sound;
     int level;
-    int maxLevel;
+    int maxExp;
     int exp;
     int cumulativeExp;
     Position engimonPos;
