@@ -32,6 +32,8 @@ public:
     void setLevelAfterBreeding();
     void printData();
     void plusExp(int exp);
+    string getName();
+    string getSpecies();
 };
 
 

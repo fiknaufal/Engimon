@@ -5,6 +5,9 @@ using namespace std;
 Player::Player(){
     this->playerPos.setX(0);
     this->playerPos.setY(0);
+    maxInv = 50;
+    inventoryE.reserve(maxInv);
+    inventoryS.reserve(maxInv);
 }
 
 Player::~Player(){}
@@ -39,3 +42,52 @@ void Player::Move(const string &c){
 Position& Player::getPlayerPos(){
     return this->playerPos;
 }
+
+int Player::getInvCount(){
+    return inventoryE.size() + inventoryS.size();
+}
+
+boolean Player::addEngimon(Engimon e){
+    if(getInvCount() < maxInv){
+        inventoryE.push_back(e)
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+boolean Player::addSkillItem(SkillItem s){
+    if(getInvCount() < maxInv){
+        vector<SkillItem>::iterator i = find(inventoryS.begin(), inventoryS.end(), s);
+
+        if(i == inventoryS.end()){
+            inventoryS.push_back(s);
+        }
+        else{
+            i->add(1);
+        }
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+// bikin get Name sama get Spesies di ENgimon lah wkwk
+void Player::showEngimonList(){
+    list <int> :: iterator i;
+    cout << "List of Engimon" << endl;
+    for(i = inventoryE.begin(); i!= inventoryE.end(); ++i){
+        cout << i->getName << " " << i->getSpecies << endl;
+    }
+}
+
+void Player::showSkillItemList(){
+    list <int> :: iterator i;
+    cout << "List of Skill Item" << endl;
+    for(i = inventoryE.begin(); i!= inventoryE.end(); ++i){
+        cout << i->getName << " " << i->getSpecies << endl;
+    }
+}
+
