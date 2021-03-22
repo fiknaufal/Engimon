@@ -10,7 +10,6 @@ protected:
     int jumlah;
 public:
     SkillItem(Skill, int);
-    ~SkillItem();
 
     boolean operator==(const SkillItem);
     Skill getSkill();
