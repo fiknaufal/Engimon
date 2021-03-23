@@ -28,6 +28,8 @@ public:
     bool addSkillItem(SkillItem);
     void showEngimonList();
     void showSkillItemList();
+    void setActiveEngi(int);
+    void petEngi();
     // void showActiveEngimon();
     // void showSkillItem();
     // void breedEngimon();

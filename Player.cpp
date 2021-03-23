@@ -120,3 +120,11 @@ void Player::showSkillItemList(){
         cout << i->getName() << " " << i->getSpecies() << endl;
     }
 }
+
+void Player::setActiveEngi(int i){
+    idActiveEngimon = i;
+}
+
+void Player::petEngi(){
+    inventoryE[idActiveEngimon].printSound();
+}
