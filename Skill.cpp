@@ -45,6 +45,6 @@ vector<Element> Skill::getElement() {
     return elements;
 }
 
-bool Skill::operator==(const Skill s) {
+bool Skill::operator==(const Skill s) const{
     return skillName == s.skillName;
 }

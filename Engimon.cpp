@@ -6,17 +6,17 @@ using namespace std;
 
 int Engimon::maxExp = 4000;
 
-Engimon::Engimon(string name, string p1name, string p2name, string p1spc, string p2spc, string spc, int exp, Element e1, Element e2, int px, int py, string sound) : engimonPos(px, py){
-    name = name;
+Engimon::Engimon(string names, string p1name, string p2name, string p1spc, string p2spc, string spc, int expr, Element e1, Element e2, int px, int py, string sounds) : engimonPos(px, py){
+    name = names;
     parentNames[0] = p1name;
     parentNames[1] = p2name;
     parentSpecies[0] = p1spc;
     parentSpecies[1] = p2spc;
-    exp = exp;
-    cumulativeExp = exp;
+    exp = expr;
+    cumulativeExp = expr;
     elements[0] = e1;
     elements[1] = e2;
-    sound = sound;
+    sound = sounds;
     species = spc;
 }
 
@@ -28,6 +28,12 @@ int Engimon::getLevel(){
 
 bool Engimon::addSkill(const Skill& sk){
     if (skill.size() < 4){
+        for (int i = 0; i < skill.size(); i++){
+            if (sk == skill[i]){
+                cout << "Skill sudah dipelajari" << endl;
+                return false;
+            }
+        }
         skill.push_back(sk);
         return true;
     }
@@ -95,13 +101,23 @@ void Engimon::printData(){
     cout << "level: " << getLevel() << endl;
     cout << "experience: " << exp << endl;
     cout << "Cumulative Experience: " << cumulativeExp << endl;
+    printSkills();
+}
+
+void Engimon::printSkills(){
+    for (int i = 0; i < skill.size(); i++){
+        cout << "Skill " << i+1 << ": " << endl;
+        cout << "   Nama Skill: "<< skill[i].getSkillName() << endl;
+        cout << "   Base Power: "<< skill[i].getBasePower() << endl;
+        cout << "   Mastery   : "<< skill[i].getMasteryLevel() << endl;
+    }
 }
 
 Element Engimon::getElement1(){
     return elements[0];
 }
 
-Element Engimon::getElement1(){
+Element Engimon::getElement2(){
     return elements[1];
 }
 

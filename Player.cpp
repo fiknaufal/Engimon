@@ -3,6 +3,7 @@
 using namespace std;
 #include <iostream>
 #include <string>
+#include <bits/stdc++.h>
 
 Player::Player(){
     this->playerPos.setX(0);
@@ -10,6 +11,7 @@ Player::Player(){
     maxInv = 50;
     inventoryE.reserve(maxInv);
     inventoryS.reserve(maxInv);
+    idActiveEngimon = 0;
 }
 
 Player::~Player(){}
@@ -51,7 +53,7 @@ int Player::getInvCount(){
 
 bool Player::addEngimon(Engimon e){
     if(getInvCount() < maxInv){
-        inventoryE.push_back(e)
+        inventoryE.push_back(e);
         return 1;
     }
     else{
@@ -78,17 +80,15 @@ bool Player::addSkillItem(SkillItem s){
 
 // bikin get Name sama get Spesies di ENgimon lah wkwk
 void Player::showEngimonList(){
-    list <int> :: iterator i;
     cout << "List of Engimon" << endl;
-    for(i = inventoryE.begin(); i!= inventoryE.end(); ++i){
-        cout << i->getName << " " << i->getSpecies << endl;
+    for(auto i = inventoryE.begin(); i!= inventoryE.end(); ++i){
+        cout << i->getName() << " " << i->getSpecies() << endl;
     }
 }
 
 void Player::showSkillItemList(){
-    list <int> :: iterator i;
     cout << "List of Skill Item" << endl;
-    for(i = inventoryE.begin(); i!= inventoryE.end(); ++i){
-        cout << i->getName << " " << i->getSpecies << endl;
+    for(auto i = inventoryE.begin(); i != inventoryE.end(); ++i){
+        cout << i->getName() << " " << i->getSpecies() << endl;
     }
 }

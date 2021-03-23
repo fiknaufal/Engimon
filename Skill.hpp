@@ -2,6 +2,7 @@
 #define SKILL_HPP
 using namespace std;
 #include <vector>
+#include <string>
 
 enum Element { None, Fire, Water, Electric, Ground, Ice };
 
@@ -20,7 +21,7 @@ class Skill {
         int getBasePower();
         int getMasteryLevel();
         vector<Element> getElement();
-        bool operator==(const Skill);
+        bool operator==(const Skill)const;
 };
 
 #endif

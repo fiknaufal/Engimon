@@ -36,6 +36,6 @@ void SkillItem::learnSkill(Engimon& e){
         }
     }
     else{
-        cout << "Gagal mempelajari skill.\n Engimon memiliki elemen berbeda!" << endl;
+        cout << "Gagal mempelajari skill.\nEngimon memiliki elemen berbeda!" << endl;
     }
 }

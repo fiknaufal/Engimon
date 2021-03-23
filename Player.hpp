@@ -13,10 +13,9 @@ private:
     Position playerPos;
     vector<Engimon> inventoryE;
     vector<SkillItem> inventoryS;
-    // MyEngimon* myEngimon;
     int maxInv;
     // int banyakEngimon;
-    // int idActiveEngimon;
+    int idActiveEngimon;
 public:
     Player();
     ~Player();

@@ -34,6 +34,7 @@ public:
     void printSound();
     void setLevelAfterBreeding();
     void printData();
+    void printSkills();
     void plusExp(int exp);
     bool addSkill(const Skill& sk);
     string getName();
