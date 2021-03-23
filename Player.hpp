@@ -30,6 +30,7 @@ public:
     void showSkillItemList();
     void setActiveEngi(int);
     void petEngi();
+    //int checkBattle(Engimon e[]);
     // void showActiveEngimon();
     // void showSkillItem();
     // void breedEngimon();

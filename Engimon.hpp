@@ -41,6 +41,7 @@ public:
     string getSpecies();
     Element getElement1();
     Element getElement2();
+    char getMapSymbol(int);
 };
 
 
