@@ -41,6 +41,34 @@ void Player::Move(const string &c){
             this->playerPos.setX(curX+1);
         }
     }
+    MoveActiveEngi();
+}
+
+void Player::MoveActiveEngi(){ // cek obstacle belom jadi
+    int x = playerPos.getX(), y = playerPos.getY(), x1 = x, y1 = y-1;
+    bool outidx = false, obstacle = false;
+    if(x1 < 0 || x1 > 14 || y1 < 0 || y1 > 14/* || obstacle()*/){ // bawah gabisa
+        outidx = true;
+        y1 = y+1;
+    }
+    if(x1 < 0 || x1 > 14 || y1 < 0 || y1 > 14){ // atas gabisa
+        outidx = true;
+        x1 = x-1;
+        y1 = y;
+    }
+    if(x1 < 0 || x1 > 14 || y1 < 0 || y1 > 14){ // kiri gabisa
+        outidx = true;
+        x1 = x+1;
+    }
+    if(x1 < 0 || x1 > 14 || y1 < 0 || y1 > 14){ // kanan gabisa
+        cout << "anjir dikepung";
+    }
+    else{
+        inventoryE[idActiveEngimon].setEngimonPos(x1, y1);
+    }
+    if(outidx){
+        throw "bambang mau kemana sih\n";
+    }
 }
 
 Position& Player::getPlayerPos(){

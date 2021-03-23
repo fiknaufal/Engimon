@@ -21,6 +21,7 @@ public:
     ~Player();
 
     void Move(const string &s);
+    void MoveActiveEngi();
     Position& getPlayerPos();
     int getInvCount();
     bool addEngimon(Engimon);
