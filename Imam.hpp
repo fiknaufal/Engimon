@@ -15,7 +15,7 @@ using std::max;
 using std::string;
 
 // Element make enum, tp g tau bagus ap kgks
-enum Element { None, Electric, Fire, Ground, Ice, Water }
+enum Element { None, Electric, Fire, Ground, Ice, Water };
 
 // fungsi battle
 // Klo dah digabungin ke class player, harusnya cuman butuh 1 parameter, yaitu engimon musuh

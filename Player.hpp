@@ -2,6 +2,7 @@
 #define PLAYER_HPP
 #include "Position.hpp"
 #include "SkillItem.hpp"
+#include "Engimon.hpp"
 using namespace std;
 #include <string>
 #include <vector>
@@ -23,8 +24,8 @@ public:
     void Move(const string &s);
     Position& getPlayerPos();
     int getInvCount();
-    boolean addEngimon(Engimon);
-    boolean addSkillItem(SkillItem);
+    bool addEngimon(Engimon);
+    bool addSkillItem(SkillItem);
     void showEngimonList();
     void showSkillItemList();
     // void showActiveEngimon();

@@ -4,6 +4,8 @@
 #include "Position.hpp"
 using namespace std;
 
+enum Element { None, Fire, Water, Electric, Ground, Ice };
+
 class Engimon
 {
 private:
@@ -12,77 +14,78 @@ private:
     string parentNames[2];
     string parentSpecies[2];
     string species;
-    string elements[2];
+    Element elements[2];
     string sound;
-    int level;
-    int maxExp;
+    static int maxExp;
     int exp;
     int cumulativeExp;
     Position engimonPos;
 
 public:
-    Engimon();
+    Engimon(string name, string p1name, string p2name, string p1spc, string p2spc, string spc, int exp, Element e1, Element e2, int px, int py, string sound);
     virtual ~Engimon();
     int getLevel();
-    int calcPower(const Engimon &engimon);
+    double getElmtAdv(const Engimon& lawan);
 
     Position& getEngimonPos();
-    void setEngimonPos();
+    void setEngimonPos(int x, int y);
     void printSound();
     void setLevelAfterBreeding();
     void printData();
     void plusExp(int exp);
     string getName();
     string getSpecies();
+    Element getElement1();
+    Element getElement2();
 };
 
 
 
 class Firemon : public Engimon{
 public:
-    Firemon(string nama, string namaBapak, string namaIbu, string spcBapak, string spcIbu, int level);
+    Firemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
     ~Firemon();
 };
 
 class Watermon : public Engimon{
 public:
-    Watermon(string nama, string namaBapak, string namaIbu, string spcBapak, string spcIbu, int level);
+    Watermon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
     ~Watermon();
 };
 
 class Electricmon : public Engimon{
 public:
-    Electricmon(string nama, string namaBapak, string namaIbu, string spcBapak, string spcIbu, int level);
+    Electricmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
     ~Electricmon();
 };
 
 class Groundmon : public Engimon{
 public:
-    Groundmon(string nama, string namaBapak, string namaIbu, string spcBapak, string spcIbu, int level);
+    Groundmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
     ~Groundmon();
 };
 
 class Icemon : public Engimon{
 public:
-    Icemon(string nama, string namaBapak, string namaIbu, string spcBapak, string spcIbu, int level);
+    Icemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
     ~Icemon();
 };
 
 class FireElectricmon : public Engimon{
 public:
-    FireElectricmon(string nama, string namaBapak, string namaIbu, string spcBapak, string spcIbu, int level);
+    FireElectricmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
     ~FireElectricmon();
 };
 
 class WaterIcemon : public Engimon{
 public:
-    WaterIcemon(string nama, string namaBapak, string namaIbu, string spcBapak, string spcIbu, int level);
+    WaterIcemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
     ~WaterIcemon();
 };
 
 class WaterGroundmon : public Engimon{
 public:
-    WaterGroundmon(string nama, string namaBapak, string namaIbu, string spcBapak, string spcIbu, int level);
+    WaterGroundmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
     ~WaterGroundmon();
 };
 

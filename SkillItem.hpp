@@ -11,8 +11,9 @@ protected:
 public:
     SkillItem(Skill, int);
 
-    boolean operator==(const SkillItem);
+    bool operator==(const SkillItem);
     Skill getSkill();
     int getJumlah();
     void add(int);
 };
+#endif

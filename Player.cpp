@@ -1,6 +1,7 @@
 #include "Player.hpp"
 #include "Engimon.hpp"
 using namespace std;
+#include <iostream>
 #include <string>
 
 Player::Player(){
@@ -48,7 +49,7 @@ int Player::getInvCount(){
     return inventoryE.size() + inventoryS.size();
 }
 
-boolean Player::addEngimon(Engimon e){
+bool Player::addEngimon(Engimon e){
     if(getInvCount() < maxInv){
         inventoryE.push_back(e)
         return 1;
@@ -58,7 +59,7 @@ boolean Player::addEngimon(Engimon e){
     }
 }
 
-boolean Player::addSkillItem(SkillItem s){
+bool Player::addSkillItem(SkillItem s){
     if(getInvCount() < maxInv){
         vector<SkillItem>::iterator i = find(inventoryS.begin(), inventoryS.end(), s);
 
@@ -90,34 +91,4 @@ void Player::showSkillItemList(){
     for(i = inventoryE.begin(); i!= inventoryE.end(); ++i){
         cout << i->getName << " " << i->getSpecies << endl;
     }
-}
-
-
-
-// bagian engimon
-
-string Engimon::getName(){
-    return name;
-}
-
-string Engimon::getSpecies(){
-    return species;
-}
-
-void Engimon::plusExp(int i){
-    exp += i;
-    cumulativeExp += i;
-    if(cumulativeExp >= maxExp){
-        throw "mati bosku";
-    }
-}
-
-void Engimon::printData(){
-    cout << "Nama: " << name << endl;
-    cout << "Parent 1: " << parentNames[0] << " species " << parentSpecies[0] << endl;
-    cout << "Parent 2: " << parentNames[1] << " species " << parentSpecies[1] << endl;
-    cout << "Element: " << elements[0] << "/" << elements[1] << endl;
-    cout << "level: " << getLevel() << endl;
-    cout << "experience: " << exp << endl;
-    cout << "Cumulative Experience: " << cumulativeExp << endl;
 }

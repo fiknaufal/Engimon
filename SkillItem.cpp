@@ -6,7 +6,7 @@ SkillItem::SkillItem(Skill s, int j){
     jumlah = j;
 }
 
-boolean SkillItem::operator==(const SkillItem s){
+bool SkillItem::operator==(const SkillItem s){
     return skill==s.skill;
 }
 
