@@ -85,8 +85,18 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
             else {
                 childElmt[0] = min(A.getElement1(), B.getElement1());
                 childElmt[1] = max(A.getElement1(), B.getElement1());
-                spc = A.getSpecies(); //masih salah
-                sound = A.getSound(); //masih salah
+                if (childElmt[0] == Fire) {
+                    spc = "FireElectricon"
+                }
+                else {
+                    if (childElmt[1] == "Ice") {
+                        spc = "WaterIcemon";
+                    }
+                    else {
+                        spc = "WaterGroundmon";
+                    }
+                }
+                sound = A.getSound();
 
                 breedingCase = 3;
             }
