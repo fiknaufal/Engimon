@@ -121,6 +121,17 @@ Element Engimon::getElement2(){
     return elements[1];
 }
 
+char Engimon::getMapSymbol(int n){
+    char big[5] = {'F', 'W', 'E', 'G', 'I'};
+    char small[5] = {'f', 'w', 'e', 'g', 'i'};
+    if(exp/100 < n){
+        return small[elements[0]-1];
+    }
+    else{
+        return big[elements[0]-1];
+    }
+}
+
 Firemon::Firemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
 Engimon(name, p1name, p2name, p1spc, p2spc,"Firemon", exp, Fire, None, px, py, "ROARRR"){}
 

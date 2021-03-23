@@ -4,16 +4,18 @@
 
 class Map{
     public:
-        Map();
+        Map(int n);
         ~Map();
 
         void updateMap(Position pp);
         void show();
+        void addEngi();
         // void randomiseEnemyMovement();
     private:
         char mapMatrix[15][15];
         Position playerPos;
-        // Wild wildArray[10];
+        vektor<Engimon> wildEngi;
+        int level;
 };
 
 #endif
