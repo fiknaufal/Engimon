@@ -45,6 +45,10 @@ vector<Element> Skill::getElement() {
     return elements;
 }
 
+void Skill::masteryLevelUp() {
+    masteryLevel++;
+}
+
 bool Skill::operator==(const Skill s) const{
     return skillName == s.skillName;
 }

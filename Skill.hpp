@@ -21,6 +21,7 @@ class Skill {
         int getBasePower();
         int getMasteryLevel();
         vector<Element> getElement();
+        void masteryLevelUp();
         bool operator==(const Skill)const;
 };
 
