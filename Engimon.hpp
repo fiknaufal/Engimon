@@ -2,15 +2,17 @@
 #define ENGIMON_HPP
 #include <string>
 #include "Position.hpp"
+#include "Skill.hpp"
 using namespace std;
-
-enum Element { None, Fire, Water, Electric, Ground, Ice };
 
 class Engimon
 {
+
+    friend bool battle(Engimon e1, Engimon e2);
+    friend Engimon breeding (Engimon& A, Engimon& B);
 private:
     string name;
-    // Skill skill[4]
+    Skill skill[4];
     string parentNames[2];
     string parentSpecies[2];
     string species;

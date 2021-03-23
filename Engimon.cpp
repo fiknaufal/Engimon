@@ -86,6 +86,14 @@ void Engimon::printData(){
     cout << "Cumulative Experience: " << cumulativeExp << endl;
 }
 
+Element Engimon::getElement1(){
+    return elements[0];
+}
+
+Element Engimon::getElement1(){
+    return elements[1];
+}
+
 Firemon::Firemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) : 
 Engimon(name, p1name, p2name, p1spc, p2spc,"Firemon", exp, Fire, None, px, py, "ROARRR"){}
 

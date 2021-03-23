@@ -3,20 +3,23 @@
 using namespace std;
 #include <vector>
 
+enum Element { None, Fire, Water, Electric, Ground, Ice };
+
 class Skill {
+    
     private:
         string skillName;
         int basePower;
         int masteryLevel;
-        vector<string> elements;
+        vector<Element> elements;
     public:
         Skill();
-        Skill(string, int, int, string);
-        Skill(string, int, int, vector<string>);
+        Skill(string, int, int, Element);
+        Skill(string, int, int, vector<Element>);
         string getSkillName();
         int getBasePower();
         int getMasteryLevel();
-        vector<string> getElement();
+        vector<Element> getElement();
         bool operator==(const Skill);
 };
 

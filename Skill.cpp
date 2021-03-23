@@ -5,21 +5,21 @@ Skill::Skill() {
     skillName = "Stand still";
     basePower = 0;
     masteryLevel = 1;
-    elements.push_back("Fire");
-    elements.push_back("Water");
-    elements.push_back("Electric");
-    elements.push_back("Ground");
-    elements.push_back("Ice");
+    elements.push_back(Fire);
+    elements.push_back(Water);
+    elements.push_back(Electric);
+    elements.push_back(Ground);
+    elements.push_back(Ice);
 }
 
-Skill::Skill(string sName, int bPower, int mLevel, string elmt) {
+Skill::Skill(string sName, int bPower, int mLevel, Element elmt) {
     skillName = sName;
     basePower = bPower;
     masteryLevel = mLevel;
     elements.push_back(elmt);
 }
 
-Skill::Skill(string sName, int bPower, int mLevel, vector<string> elmts) {
+Skill::Skill(string sName, int bPower, int mLevel, vector<Element> elmts) {
     skillName = sName;
     basePower = bPower;
     masteryLevel = mLevel;
@@ -41,7 +41,7 @@ int Skill::getMasteryLevel() {
     return masteryLevel;
 }
 
-vector<string> Skill::getElement() {
+vector<Element> Skill::getElement() {
     return elements;
 }
 

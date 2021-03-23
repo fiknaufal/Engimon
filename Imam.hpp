@@ -14,8 +14,7 @@ using std::min;
 using std::max;
 using std::string;
 
-// Element make enum, tp g tau bagus ap kgks
-enum Element { None, Electric, Fire, Ground, Ice, Water };
+
 
 // fungsi battle
 // Klo dah digabungin ke class player, harusnya cuman butuh 1 parameter, yaitu engimon musuh
@@ -25,8 +24,8 @@ bool battle(Engimon e1, Engimon e2) {
 
     // Misalkan atribut skill udh ad di engimon
     for (int i=0; i<4; i++) {
-        powerE1 += e1.skill[i].basePower * e1.skill[i].masteryLevel;
-        powerE2 += e2.skill[i].basePower * e2.skill[i].masteryLevel;
+        powerE1 += e1.skill[i].getBasePower() * e1.skill[i].getMasteryLevel();
+        powerE2 += e2.skill[i].getBasePower() * e2.skill[i].getMasteryLevel();
     }
 
     powerE1 += e1.getLevel() * e1.getElmtAdv(e2);
@@ -53,19 +52,28 @@ Engimon breeding (Engimon& A, Engimon& B) {
 
     else {
         Element childElmt[2] = {None, None};
+        string spc; string sound;
         if (A.getElmtAdv(B) > 1) {
             childElmt[0] = A.elements[0];
+            spc = A.getSpecies();
+            sound = A.sound;
         }
         else if (B.getElmtAdv(A) > 1) {
             childElmt[0] = B.elements[0];
+            spc = B.getSpecies();
+            sound = B.sound;
         }
         else {
             if (A.elements[0] == B.elements[0]) {
                 childElmt[0] = A.elements[0];
+                spc = A.getSpecies();
+                sound = A.sound;
             }
             else {
                 childElmt[0] = min(A.elements[0], B.elements[0]);
                 childElmt[1] = max(A.elements[0], B.elements[0]);
+                spc = A.getSpecies(); //masih salah
+                sound = A.sound; //masih salah
             }
         }
 
@@ -74,7 +82,7 @@ Engimon breeding (Engimon& A, Engimon& B) {
         cin >> childName;
 
         // Buat objek Engimon baru dgn element dan nama diatas
-        output = new Engimon();
+        output = new Engimon(childName, A.getName(), B.getName(), A.getSpecies(), B.getSpecies(), spc, 0, childElmt[0], childElmt[1], -1, -1, sound);
 
     }
     return output;
