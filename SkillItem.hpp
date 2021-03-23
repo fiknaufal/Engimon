@@ -1,8 +1,9 @@
 #ifndef SKILLITEM_HPP
 #define SKILLITEM_HPP
 #include "Skill.hpp"
-using namespace std;
+#include "Engimon.hpp"
 #include <string>
+using namespace std;
 
 class SkillItem{
 protected:
@@ -15,5 +16,6 @@ public:
     Skill getSkill();
     int getJumlah();
     void add(int);
+    void learnSkill(Engimon& e);
 };
 #endif

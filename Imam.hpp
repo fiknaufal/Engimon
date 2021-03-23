@@ -23,8 +23,11 @@ bool battle(Engimon e1, Engimon e2) {
     int powerE2;
 
     // Misalkan atribut skill udh ad di engimon
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<e1.skill.size(); i++) {
         powerE1 += e1.skill[i].getBasePower() * e1.skill[i].getMasteryLevel();
+    }
+
+    for (int i=0; i<e2.skill.size(); i++) {
         powerE2 += e2.skill[i].getBasePower() * e2.skill[i].getMasteryLevel();
     }
 

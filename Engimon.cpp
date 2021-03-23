@@ -26,6 +26,17 @@ int Engimon::getLevel(){
     return exp % 100;
 }
 
+bool Engimon::addSkill(const Skill& sk){
+    if (skill.size() < 4){
+        skill.push_back(sk);
+        return true;
+    }
+    else{
+        cout << "Skill sudah penuh" << endl;
+        return false;
+    }
+}
+
 double Engimon::getElmtAdv(const Engimon& lawan){
     double tabelAdv[6][6] = {{0, 0, 0, 0, 0 ,0}, {0,1,0,1,0.5,2}, {0,2,1,0,1,1}, {0,1,2,1,0,1.5}, {0,1.5,1,2,1,0}, {0,0,1,0.5,2,1}};
     double adv[4];
@@ -120,16 +131,16 @@ Engimon(name, p1name, p2name, p1spc, p2spc,"Icemon", exp, Ice, None, px, py, "BR
 Icemon::~Icemon(){};
 
 FireElectricmon::FireElectricmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) : 
-Engimon(name, p1name, p2name, p1spc, p2spc,"FireElectricmon", exp, Fire, Electric, px, py, "BRRR BRRR"){}
+Engimon(name, p1name, p2name, p1spc, p2spc,"FireElectricmon", exp, Fire, Electric, px, py, "ROAR AYAY"){}
 
 FireElectricmon::~FireElectricmon(){};
 
 WaterIcemon::WaterIcemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) : 
-Engimon(name, p1name, p2name, p1spc, p2spc,"WaterIcemon", exp, Water, Ice, px, py, "BRRR BRRR"){}
+Engimon(name, p1name, p2name, p1spc, p2spc,"WaterIcemon", exp, Water, Ice, px, py, "BYUR BRRR"){}
 
 WaterIcemon::~WaterIcemon(){};
 
 WaterGroundmon::WaterGroundmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) : 
-Engimon(name, p1name, p2name, p1spc, p2spc,"WaterGroundmon", exp, Water, Ground, px, py, "BRRR BRRR"){}
+Engimon(name, p1name, p2name, p1spc, p2spc,"WaterGroundmon", exp, Water, Ground, px, py, "BUMM BYURR"){}
 
 WaterGroundmon::~WaterGroundmon(){};

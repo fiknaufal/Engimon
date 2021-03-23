@@ -3,16 +3,16 @@
 #include <string>
 #include "Position.hpp"
 #include "Skill.hpp"
+#include <vector>
 using namespace std;
 
 class Engimon
 {
-
     friend bool battle(Engimon e1, Engimon e2);
     friend Engimon breeding (Engimon& A, Engimon& B);
 private:
     string name;
-    Skill skill[4];
+    vector<Skill> skill;
     string parentNames[2];
     string parentSpecies[2];
     string species;
@@ -35,6 +35,7 @@ public:
     void setLevelAfterBreeding();
     void printData();
     void plusExp(int exp);
+    bool addSkill(const Skill& sk);
     string getName();
     string getSpecies();
     Element getElement1();
