@@ -1,6 +1,7 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 #include "Player.hpp"
+#include <stdlib.h>
 
 class Map{
     public:
