@@ -48,48 +48,56 @@ public:
 class Firemon : public Engimon{
 public:
     Firemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
+    Firemon(int, int, int);
     ~Firemon();
 };
 
 class Watermon : public Engimon{
 public:
     Watermon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
+    Watermon(int, int, int);
     ~Watermon();
 };
 
 class Electricmon : public Engimon{
 public:
     Electricmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
+    Electricmon(int, int, int);
     ~Electricmon();
 };
 
 class Groundmon : public Engimon{
 public:
     Groundmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
+    Groundmon(int, int, int);
     ~Groundmon();
 };
 
 class Icemon : public Engimon{
 public:
     Icemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
+    Icemon(int, int, int);
     ~Icemon();
 };
 
 class FireElectricmon : public Engimon{
 public:
     FireElectricmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
+    FireElectricmon(int, int, int);
     ~FireElectricmon();
 };
 
 class WaterIcemon : public Engimon{
 public:
     WaterIcemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
+    WaterIcemon(int, int, int);
     ~WaterIcemon();
 };
 
 class WaterGroundmon : public Engimon{
 public:
     WaterGroundmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py);
+    WaterGroundmon(int, int, int);
     ~WaterGroundmon();
 };
 

@@ -50,7 +50,7 @@ double Engimon::getElmtAdv(const Engimon& lawan){
     adv[1] = tabelAdv[elements[0]][lawan.elements[1]];
     adv[2] = tabelAdv[elements[1]][lawan.elements[0]];
     adv[3] = tabelAdv[elements[1]][lawan.elements[1]];
-    
+
     double max = 0;
     for (int i = 0; i < 4; i++){
         if (adv[i] > max){
@@ -121,42 +121,66 @@ Element Engimon::getElement2(){
     return elements[1];
 }
 
-Firemon::Firemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) : 
+Firemon::Firemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
 Engimon(name, p1name, p2name, p1spc, p2spc,"Firemon", exp, Fire, None, px, py, "ROARRR"){}
+
+Firemon::Firemon(int x, int px, int py) :
+Engimon("Wild Firemon", "Firemon Ibu", "Firemon Ibu juga", "Firemon", "Firemon", "Firemon", x, Fire, None, px, py, "ROARRR"){}
 
 Firemon::~Firemon(){};
 
-Watermon::Watermon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) : 
+Watermon::Watermon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
 Engimon(name, p1name, p2name, p1spc, p2spc,"Watermon", exp, Water, None, px, py, "BYURBYURR"){}
+
+Watermon::Watermon(int x, int px, int py) :
+Engimon("Wild Watermon", "Watermon Ibu", "Watermon Ibu juga", "Watermon", "Watermon","Watermon", x, Water, None, px, py, "BYURBYURR"){}
 
 Watermon::~Watermon(){};
 
-Electricmon::Electricmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) : 
+Electricmon::Electricmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
 Engimon(name, p1name, p2name, p1spc, p2spc,"Electricmon", exp, Electric, None, px, py, "AYAYAYAYYY"){}
+
+Electricmon::Electricmon(int x,int px, int py) :
+Engimon("Wild Electricmon", "Electricmon Ibu", "Electricmon Ibu juga", "Electricmon", "Electricmon", "Electricmon", x, Electric, None, py, px, "AYAYAYAYYY"){}
 
 Electricmon::~Electricmon(){};
 
-Groundmon::Groundmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) : 
+Groundmon::Groundmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
 Engimon(name, p1name, p2name, p1spc, p2spc,"Groundmon", exp, Ground, None, px, py, "BUMBUMMM"){}
+
+Groundmon::Groundmon(int x, int px, int py) :
+Engimon("Wild Groundmon", "Groundmon Ibu", "Groundmon Ibu juga", "Groundmon", "Groundmon","Groundmon", x, Ground, None, px, py, "BUMBUMMM"){}
 
 Groundmon::~Groundmon(){};
 
-Icemon::Icemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) : 
+Icemon::Icemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
 Engimon(name, p1name, p2name, p1spc, p2spc,"Icemon", exp, Ice, None, px, py, "BRRR BRRR"){}
+
+Icemon::Icemon(int x, int px, int py) :
+Engimon("Wild Icemon", "Icemon Ibu", "Icemon Ibu juga", "Icemon", "Icemon","Icemon", x, Ice, None, px, py, "BRRR BRRR"){}
 
 Icemon::~Icemon(){};
 
-FireElectricmon::FireElectricmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) : 
+FireElectricmon::FireElectricmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
 Engimon(name, p1name, p2name, p1spc, p2spc,"FireElectricmon", exp, Fire, Electric, px, py, "ROAR AYAY"){}
+
+FireElectricmon::FireElectricmon(int x, int px, int py) :
+Engimon("Wild FireElectricmon", "FireElectricmon Ibu", "FireElectricmon Ibu juga", "FireElectricmon", "FireElectricmon","FireElectricmon", x, Fire, Electric, px, py, "ROAR AYAY"){}
 
 FireElectricmon::~FireElectricmon(){};
 
-WaterIcemon::WaterIcemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) : 
+WaterIcemon::WaterIcemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
 Engimon(name, p1name, p2name, p1spc, p2spc,"WaterIcemon", exp, Water, Ice, px, py, "BYUR BRRR"){}
+
+WaterIcemon::WaterIcemon(int x, int px, int py) :
+Engimon("Wild WaterIcemon", "WaterIcemon Ibu", "WaterIcemon Ibu juga", "WaterIcemon", "WaterIcemon","WaterIcemon", x, Water, Ice, px, py, "BYUR BRRR"){}
 
 WaterIcemon::~WaterIcemon(){};
 
-WaterGroundmon::WaterGroundmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) : 
+WaterGroundmon::WaterGroundmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
 Engimon(name, p1name, p2name, p1spc, p2spc,"WaterGroundmon", exp, Water, Ground, px, py, "BUMM BYURR"){}
+
+WaterGroundmon::WaterGroundmon(int x, int px, int py) :
+Engimon("Wild WaterGroundmon", "WaterGroundmon Ibu", "WaterGroundmon Ibu juga", "WaterGroundmon", "WaterGroundmon","WaterGroundmon", x, Water, Ground, px, py, "BUMM BYURR"){}
 
 WaterGroundmon::~WaterGroundmon(){};
