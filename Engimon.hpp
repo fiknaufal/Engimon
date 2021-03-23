@@ -10,9 +10,10 @@ class Engimon
 {
     friend bool battle(Engimon e1, Engimon e2);
     friend Engimon breeding (Engimon& A, Engimon& B);
+protected:
+    vector<Skill> skill;
 private:
     string name;
-    vector<Skill> skill;
     string parentNames[2];
     string parentSpecies[2];
     string species;

@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include "Position.hpp"
+#include "skillgacha.hpp"
 using namespace std;
 
 int Engimon::maxExp = 4000;
@@ -133,65 +134,113 @@ char Engimon::getMapSymbol(int n){
 }
 
 Firemon::Firemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
-Engimon(name, p1name, p2name, p1spc, p2spc,"Firemon", exp, Fire, None, px, py, "ROARRR"){}
+Engimon(name, p1name, p2name, p1spc, p2spc,"Firemon", exp, Fire, None, px, py, "ROARRR"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Fire, None);
+}
 
 Firemon::Firemon(int x, int px, int py) :
-Engimon("Wild Firemon", "Firemon Ibu", "Firemon Ibu juga", "Firemon", "Firemon", "Firemon", x, Fire, None, px, py, "ROARRR"){}
+Engimon("Wild Firemon", "Firemon Ibu", "Firemon Ibu juga", "Firemon", "Firemon", "Firemon", x, Fire, None, px, py, "ROARRR"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Fire, None);
+}
 
 Firemon::~Firemon(){};
 
 Watermon::Watermon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
-Engimon(name, p1name, p2name, p1spc, p2spc,"Watermon", exp, Water, None, px, py, "BYURBYURR"){}
+Engimon(name, p1name, p2name, p1spc, p2spc,"Watermon", exp, Water, None, px, py, "BYURBYURR"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Water, None);
+}
 
 Watermon::Watermon(int x, int px, int py) :
-Engimon("Wild Watermon", "Watermon Ibu", "Watermon Ibu juga", "Watermon", "Watermon","Watermon", x, Water, None, px, py, "BYURBYURR"){}
+Engimon("Wild Watermon", "Watermon Ibu", "Watermon Ibu juga", "Watermon", "Watermon","Watermon", x, Water, None, px, py, "BYURBYURR"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Water, None);
+}
 
 Watermon::~Watermon(){};
 
 Electricmon::Electricmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
-Engimon(name, p1name, p2name, p1spc, p2spc,"Electricmon", exp, Electric, None, px, py, "AYAYAYAYYY"){}
+Engimon(name, p1name, p2name, p1spc, p2spc,"Electricmon", exp, Electric, None, px, py, "AYAYAYAYYY"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Electric, None);
+}
 
 Electricmon::Electricmon(int x,int px, int py) :
-Engimon("Wild Electricmon", "Electricmon Ibu", "Electricmon Ibu juga", "Electricmon", "Electricmon", "Electricmon", x, Electric, None, py, px, "AYAYAYAYYY"){}
+Engimon("Wild Electricmon", "Electricmon Ibu", "Electricmon Ibu juga", "Electricmon", "Electricmon", "Electricmon", x, Electric, None, py, px, "AYAYAYAYYY"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Electric, None);
+}
 
 Electricmon::~Electricmon(){};
 
 Groundmon::Groundmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
-Engimon(name, p1name, p2name, p1spc, p2spc,"Groundmon", exp, Ground, None, px, py, "BUMBUMMM"){}
+Engimon(name, p1name, p2name, p1spc, p2spc,"Groundmon", exp, Ground, None, px, py, "BUMBUMMM"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Ground, None);
+}
 
 Groundmon::Groundmon(int x, int px, int py) :
-Engimon("Wild Groundmon", "Groundmon Ibu", "Groundmon Ibu juga", "Groundmon", "Groundmon","Groundmon", x, Ground, None, px, py, "BUMBUMMM"){}
+Engimon("Wild Groundmon", "Groundmon Ibu", "Groundmon Ibu juga", "Groundmon", "Groundmon","Groundmon", x, Ground, None, px, py, "BUMBUMMM"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Ground, None);
+}
 
 Groundmon::~Groundmon(){};
 
 Icemon::Icemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
-Engimon(name, p1name, p2name, p1spc, p2spc,"Icemon", exp, Ice, None, px, py, "BRRR BRRR"){}
+Engimon(name, p1name, p2name, p1spc, p2spc,"Icemon", exp, Ice, None, px, py, "BRRR BRRR"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Ice, None);
+}
 
 Icemon::Icemon(int x, int px, int py) :
-Engimon("Wild Icemon", "Icemon Ibu", "Icemon Ibu juga", "Icemon", "Icemon","Icemon", x, Ice, None, px, py, "BRRR BRRR"){}
+Engimon("Wild Icemon", "Icemon Ibu", "Icemon Ibu juga", "Icemon", "Icemon","Icemon", x, Ice, None, px, py, "BRRR BRRR"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Ice, None);
+}
 
 Icemon::~Icemon(){};
 
 FireElectricmon::FireElectricmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
-Engimon(name, p1name, p2name, p1spc, p2spc,"FireElectricmon", exp, Fire, Electric, px, py, "ROAR AYAY"){}
+Engimon(name, p1name, p2name, p1spc, p2spc,"FireElectricmon", exp, Fire, Electric, px, py, "ROAR AYAY"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Fire, Electric);
+}
 
 FireElectricmon::FireElectricmon(int x, int px, int py) :
-Engimon("Wild FireElectricmon", "FireElectricmon Ibu", "FireElectricmon Ibu juga", "FireElectricmon", "FireElectricmon","FireElectricmon", x, Fire, Electric, px, py, "ROAR AYAY"){}
+Engimon("Wild FireElectricmon", "FireElectricmon Ibu", "FireElectricmon Ibu juga", "FireElectricmon", "FireElectricmon","FireElectricmon", x, Fire, Electric, px, py, "ROAR AYAY"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Fire, Electric);
+}
 
 FireElectricmon::~FireElectricmon(){};
 
 WaterIcemon::WaterIcemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
-Engimon(name, p1name, p2name, p1spc, p2spc,"WaterIcemon", exp, Water, Ice, px, py, "BYUR BRRR"){}
+Engimon(name, p1name, p2name, p1spc, p2spc,"WaterIcemon", exp, Water, Ice, px, py, "BYUR BRRR"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Water, Ice);
+}
 
 WaterIcemon::WaterIcemon(int x, int px, int py) :
-Engimon("Wild WaterIcemon", "WaterIcemon Ibu", "WaterIcemon Ibu juga", "WaterIcemon", "WaterIcemon","WaterIcemon", x, Water, Ice, px, py, "BYUR BRRR"){}
+Engimon("Wild WaterIcemon", "WaterIcemon Ibu", "WaterIcemon Ibu juga", "WaterIcemon", "WaterIcemon","WaterIcemon", x, Water, Ice, px, py, "BYUR BRRR"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Water, Ice);
+}
 
 WaterIcemon::~WaterIcemon(){};
 
 WaterGroundmon::WaterGroundmon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
-Engimon(name, p1name, p2name, p1spc, p2spc,"WaterGroundmon", exp, Water, Ground, px, py, "BUMM BYURR"){}
+Engimon(name, p1name, p2name, p1spc, p2spc,"WaterGroundmon", exp, Water, Ground, px, py, "BUMM BYURR"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Water, Ground);
+}
 
 WaterGroundmon::WaterGroundmon(int x, int px, int py) :
-Engimon("Wild WaterGroundmon", "WaterGroundmon Ibu", "WaterGroundmon Ibu juga", "WaterGroundmon", "WaterGroundmon","WaterGroundmon", x, Water, Ground, px, py, "BUMM BYURR"){}
+Engimon("Wild WaterGroundmon", "WaterGroundmon Ibu", "WaterGroundmon Ibu juga", "WaterGroundmon", "WaterGroundmon","WaterGroundmon", x, Water, Ground, px, py, "BUMM BYURR"){
+    skillgacha sg;
+    skill = sg.getSkillGen(Water, Ground);
+}
 
 WaterGroundmon::~WaterGroundmon(){};
