@@ -86,10 +86,10 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
                 childElmt[0] = min(A.getElement1(), B.getElement1());
                 childElmt[1] = max(A.getElement1(), B.getElement1());
                 if (childElmt[0] == Fire) {
-                    spc = "FireElectricon"
+                    spc = "FireElectricmon";
                 }
                 else {
-                    if (childElmt[1] == "Ice") {
+                    if (childElmt[1] == Ice) {
                         spc = "WaterIcemon";
                     }
                     else {
@@ -166,7 +166,6 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
             }
 
             if ((skillBIdx > -1) && (skillAIdx > -1)) {
-                if ()
 
                 if (skillsA[skillAIdx].getMasteryLevel() > skillsB[skillBIdx].getMasteryLevel()) {
                     anak.addSkill(skillsA[skillAIdx]);

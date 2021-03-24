@@ -15,7 +15,7 @@ class Map{
     private:
         char mapMatrix[15][15];
         Position playerPos;
-        vektor<Engimon> wildEngi;
+        vector<Engimon> wildEngi;
         int level;
 };
 

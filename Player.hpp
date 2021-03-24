@@ -33,7 +33,7 @@ public:
     //int checkBattle(Engimon e[]);
     // void showActiveEngimon();
     // void showSkillItem();
-    // void breedEngimon();
+    void breedEngimon(Engimon& A, Engimon& B);
     // void battle();
 
 };
