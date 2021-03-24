@@ -28,13 +28,12 @@ public:
     bool addSkillItem(SkillItem);
     void showEngimonList();
     void showSkillItemList();
+    void showActiveEngimon();
     void setActiveEngi(int);
     void petEngi();
     //int checkBattle(Engimon e[]);
-    // void showActiveEngimon();
-    // void showSkillItem();
     void breedEngimon(Engimon& A, Engimon& B);
-    // void battle();
+    bool battle(Engimon e);
 
 };
 

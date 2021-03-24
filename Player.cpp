@@ -7,7 +7,7 @@ using namespace std;
 
 Player::Player(){
     this->playerPos.setX(0);
-    this->playerPos.setY(0);
+    this->playerPos.setY(1);
     maxInv = 50;
     inventoryE.reserve(maxInv);
     inventoryS.reserve(maxInv);
@@ -15,6 +15,10 @@ Player::Player(){
 }
 
 Player::~Player(){}
+
+void Player::showActiveEngimon(){
+    inventoryE[idActiveEngimon].printData();
+}
 
 void Player::Move(const string &c){
     if (c == "w"){

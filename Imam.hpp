@@ -19,23 +19,26 @@ using std::string;
 
 // fungsi battle
 // Klo dah digabungin ke class player, harusnya cuman butuh 1 parameter, yaitu engimon musuh
-bool battle(Engimon e1, Engimon e2) {
+bool Player::battle(Engimon e) {
     int powerE1;
     int powerE2;
 
     // Misalkan atribut skill udh ad di engimon
-    for (int i=0; i<e1.skill.size(); i++) {
-        powerE1 += e1.skill[i].getBasePower() * e1.skill[i].getMasteryLevel();
+    for (int i=0; i<inventoryE[idActiveEngimon].getSkill().size(); i++) {
+        powerE1 += inventoryE[idActiveEngimon].getSkill()[i].getBasePower() * inventoryE[idActiveEngimon].getSkill()[i].getMasteryLevel();
     }
 
-    for (int i=0; i<e2.skill.size(); i++) {
-        powerE2 += e2.skill[i].getBasePower() * e2.skill[i].getMasteryLevel();
+    for (int i=0; i<e.getSkill().size(); i++) {
+        powerE2 += e.getSkill()[i].getBasePower() * e.getSkill()[i].getMasteryLevel();
     }
 
-    powerE1 += e1.getLevel() * e1.getElmtAdv(e2);
-    powerE2 += e2.getLevel() * e2.getElmtAdv(e1);
+    powerE1 += inventoryE[idActiveEngimon].getLevel() * inventoryE[idActiveEngimon].getElmtAdv(e);
+    powerE2 += e.getLevel() * e.getElmtAdv(inventoryE[idActiveEngimon]);
 
-    return (powerE1 > powerE2);
+    if (powerE1 < powerE2){
+        inventoryE.erase(inventoryE.begin()+idActiveEngimon);
+    }
+    return (powerE1 >= powerE2);
 }
 
 // fungsi breeding
