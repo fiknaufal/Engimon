@@ -40,9 +40,11 @@ public:
     bool addSkill(const Skill& sk);
     string getName();
     string getSpecies();
+    string getSound();
     Element getElement1();
     Element getElement2();
     char getMapSymbol(int);
+    vector<Skill> getSkill();
 };
 
 

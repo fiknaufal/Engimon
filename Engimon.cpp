@@ -137,6 +137,10 @@ string Engimon::getSound(){
     return sound;
 }
 
+vector<Skill> Engimon::getSkill(){
+    return this->skill;
+}
+
 Firemon::Firemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
 Engimon(name, p1name, p2name, p1spc, p2spc,"Firemon", exp, Fire, None, px, py, "ROARRR"){
     skillgacha sg;

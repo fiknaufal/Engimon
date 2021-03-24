@@ -34,6 +34,7 @@ public:
     //int checkBattle(Engimon e[]);
     void breedEngimon(Engimon& A, Engimon& B);
     bool battle(Engimon e);
+    bool lose();
 
 };
 

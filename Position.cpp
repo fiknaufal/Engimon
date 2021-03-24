@@ -33,3 +33,7 @@ void Position::setX(int x){
 void Position::setY(int y){
     this->y = y;
 }
+
+bool Position::operator==(const Position &p){
+    return (this->x == p.x && this->y == p.y);
+}

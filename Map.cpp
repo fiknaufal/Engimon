@@ -14,8 +14,12 @@ Map::Map(int n) : sg(){
             this->mapMatrix[i][j] = '+';
         }
     }
-    this->mapMatrix[this->player.getPlayerPos().getY()][this->player.getPlayerPos().getX()] = 'P';
     wildEngi.reserve(10);
+    for (int i = 0; i<5; i++){
+        addEngi();
+    }
+    FireElectricmon f(3000, 0, 0);
+    player.addEngimon(f);
     level = n;
     this->state = Jalan;
 }
@@ -24,7 +28,7 @@ Map::~Map(){}
 
 void Map::gameFlow(){
     string cmd;
-    while (state != Exit){
+    while (state != Exit && !player.lose()){
         if (isBattle()){
             this->state = Battle;
         }
@@ -52,20 +56,25 @@ void Map::gameFlow(){
         }else if (state == Bag){
             cout << "--- BAG ---" << endl;
             cout << "Available Commands:" << endl;
-            cout << "1. show engimons\n2. show skill items\n3. close bag" << endl;
+            cout << "1. engimons: show engimons\n2. skillItems: show skill items\n3. close: close bag" << endl;
             cout << "-----------" << endl;
-            cout << "command: ";
-            cin >> cmd;
-            if (cmd == "show engimons"){
-                player.showEngimonList();
-            }else if(cmd == "show skill items"){
-                player.showSkillItemList();
-            }else if (cmd == "close bag"){
-                state = Jalan;
-            }else{
-                cout << "Command tidak dikenali" << endl;
+            while (state == Bag){
+                cout << "command: ";
+                string cmdbag;
+                cin >> cmdbag;
+                if (cmdbag == "engimons"){
+                    player.showEngimonList();
+                }else if(cmdbag == "skillItems"){
+                    player.showSkillItemList();
+                }else if (cmdbag == "close"){
+                    state = Jalan;
+                }else{
+                    cout << "Command tidak dikenali" << endl;
+                }
             }
+
         }else if (state == Battle){
+            show();
             cout << "You are battling:" << endl;
             wildEngi[idSurroundEnemy()].printData();
             cout << "Battle result:" << endl;
@@ -79,14 +88,58 @@ void Map::gameFlow(){
                     cout << "Kamu menang!\n"<< wildEngi[idSurroundEnemy()].getName() << " tidak dapat dimasukkan ke dalam inventory!" << endl;
                 }
                 wildEngi.erase(wildEngi.begin()+idSurroundEnemy());
+                addEngi();
+                state = Jalan;
             }
             else{
-                cout << "Kamu Kalah!\nPilih Engimon lain untuk bertarung :"<< endl;
-                player.showEngimonList();
-                // suruh pilih engimon baru
+                cout << "Kamu Kalah!" << endl;
+                if (!player.lose()){
+                    cout << "Pilih Engimon lain untuk bertarung :"<< endl;
+                    player.showEngimonList();
+                    cout << "Pilih engimon nomor: " << endl;
+                    int id;
+                    cin >> id;
+                    player.setActiveEngi(id);
+                }
             }
         }
     }
+}
+
+bool Map::isBattle(){
+    for (int i = 0; i < wildEngi.size(); i++){
+        if (player.getPlayerPos().getY()+1 == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX() == wildEngi[i].getEngimonPos().getX()){
+            return true;
+        }
+        if (player.getPlayerPos().getY() == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX()+1 == wildEngi[i].getEngimonPos().getX()){
+            return true;
+        }
+        if (player.getPlayerPos().getY()-1 == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX() == wildEngi[i].getEngimonPos().getX()){
+            return true;
+        }
+        if (player.getPlayerPos().getY()-1 == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX() == wildEngi[i].getEngimonPos().getX()){
+            return true;
+        }
+    }
+    return false;
+}
+
+int Map::idSurroundEnemy(){
+    for (int i = 0; i < wildEngi.size(); i++){
+        if (player.getPlayerPos().getY()+1 == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX() == wildEngi[i].getEngimonPos().getX()){
+            return i;
+        }
+        if (player.getPlayerPos().getY() == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX()+1 == wildEngi[i].getEngimonPos().getX()){
+            return i;
+        }
+        if (player.getPlayerPos().getY()-1 == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX() == wildEngi[i].getEngimonPos().getX()){
+            return i;
+        }
+        if (player.getPlayerPos().getY()-1 == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX() == wildEngi[i].getEngimonPos().getX()){
+            return i;
+        }
+    }
+    return -1;
 }
 
 void Map::show(){
@@ -98,9 +151,9 @@ void Map::show(){
         }
     }
 
-    maps[player.getPlayerPos().getX()][player.getPlayerPos().getY()] = 'P';
+    maps[player.getPlayerPos().getY()][player.getPlayerPos().getX()] = 'P';
     for(int i = 0; i < wildEngi.size(); i++){
-        maps[wildEngi[i].getEngimonPos().getX()][wildEngi[i].getEngimonPos().getY()] = wildEngi[i].getMapSymbol(level);
+        maps[wildEngi[i].getEngimonPos().getY()][wildEngi[i].getEngimonPos().getX()] = wildEngi[i].getMapSymbol(level);
     }
 
     for (int i = 14; i >= 0; i--){
@@ -114,7 +167,7 @@ void Map::show(){
 void Map::addEngi(){
     if(wildEngi.size() < 10){
         int r = (rand()%30 + 1)*100, r1 = rand()%8;
-        int x = 0, y = 0;
+        int x = rand()%15, y = rand()%15;
         Engimon* w;
         switch(r1){
             case 0:
