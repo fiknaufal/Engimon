@@ -33,7 +33,7 @@ public:
     void setActiveEngi(int);
     void petEngi();
     //int checkBattle(Engimon e[]);
-    void breedEngimon(Engimon& A, Engimon& B);
+    void breedEngimon(int idxA, int idxB);
     bool battle(Engimon e);
     bool lose();
 

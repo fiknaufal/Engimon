@@ -170,12 +170,12 @@ bool Player::battle(Engimon e) {
 
 // fungsi breeding
 // Tinggal digabungin ke class player jg, nnt anaknya langsung dimasukin ke list aj, kgk usah jd output
-void Player::breedEngimon (Engimon& A, Engimon& B) {
+void Player::breedEngimon (int idxA, int idxB) {
 
     int breedingCase = -1;
 
     // Cek level ortu
-    if ((A.getLevel() < 30) && (B.getLevel() < 30)) 
+    if ((inventoryE.getVector()[idxA].getLevel() < 30) && (inventoryE.getVector()[idxB].getLevel() < 30)) 
         // Bingung antara throw atau munculin output aj
         cout << "Level ortu g cukup" << endl;
 
@@ -184,37 +184,37 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
         cout << "Inventory penuh" << endl;
 
     // Cek elemen ortu dual atau g, mungkin di-g bisa dlu-in
-    else if ((A.getElement1() != None) || (B.getElement2() != None))
+    else if ((inventoryE.getVector()[idxA].getElement2() != None) || (inventoryE.getVector()[idxB].getElement2() != None))
         cout << "Dual elmt engimon g punya kelamin" << endl;
 
     else {
         Element childElmt[2] = {None, None};
         string spc; string sound;
-        if (A.getElmtAdv(B) > 1) {
-            childElmt[0] = A.getElement1();
-            spc = A.getSpecies();
-            sound = A.getSound();
+        if (inventoryE.getVector()[idxA].getElmtAdv(inventoryE.getVector()[idxB]) > 1) {
+            childElmt[0] = inventoryE.getVector()[idxA].getElement1();
+            spc = inventoryE.getVector()[idxA].getSpecies();
+            sound = inventoryE.getVector()[idxA].getSound();
             
             breedingCase = 0;
         }
-        else if (B.getElmtAdv(A) > 1) {
-            childElmt[0] = B.getElement1();
-            spc = B.getSpecies();
-            sound = B.getSound();
+        else if (inventoryE.getVector()[idxB].getElmtAdv(inventoryE.getVector()[idxA]) > 1) {
+            childElmt[0] = inventoryE.getVector()[idxB].getElement1();
+            spc = inventoryE.getVector()[idxB].getSpecies();
+            sound = inventoryE.getVector()[idxB].getSound();
 
             breedingCase = 1;
         }
         else {
-            if (A.getElement1() == B.getElement1()) {
-                childElmt[0] = A.getElement1();
-                spc = A.getSpecies();
-                sound = A.getSound();
+            if (inventoryE.getVector()[idxA].getElement1() == inventoryE.getVector()[idxB].getElement1()) {
+                childElmt[0] = inventoryE.getVector()[idxA].getElement1();
+                spc = inventoryE.getVector()[idxA].getSpecies();
+                sound = inventoryE.getVector()[idxA].getSound();
 
                 breedingCase = 2;
             }
             else {
-                childElmt[0] = min(A.getElement1(), B.getElement1());
-                childElmt[1] = max(A.getElement1(), B.getElement1());
+                childElmt[0] = min(inventoryE.getVector()[idxA].getElement1(), inventoryE.getVector()[idxB].getElement1());
+                childElmt[1] = max(inventoryE.getVector()[idxA].getElement1(), inventoryE.getVector()[idxB].getElement1());
                 if (childElmt[0] == Fire) {
                     spc = "FireElectricmon";
                 }
@@ -226,7 +226,7 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
                         spc = "WaterGroundmon";
                     }
                 }
-                sound = A.getSound();
+                sound = inventoryE.getVector()[idxA].getSound();
 
                 breedingCase = 3;
             }
@@ -238,12 +238,12 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
         cin >> childName;
 
         // Buat objek Engimon baru dgn element dan nama diatas
-        Engimon anak = Engimon(childName, A.getName(), B.getName(), A.getSpecies(), B.getSpecies(), spc, 0, childElmt[0], childElmt[1], -1, -1, sound);
-
+        Engimon anak(childName, inventoryE.getVector()[idxA].getName(), inventoryE.getVector()[idxB].getName(), inventoryE.getVector()[idxA].getSpecies(), inventoryE.getVector()[idxB].getSpecies(), spc, 0, childElmt[0], childElmt[1], -1, -1, sound);
+        cout << "masuk" << endl;
         // Masukin skill-skill nya
-        vector<Skill> skillsA = A.getSkill();
-        vector<Skill> skillsB = B.getSkill();
-
+        vector<Skill> skillsA = inventoryE.getVector()[idxA].getSkill();
+        vector<Skill> skillsB = inventoryE.getVector()[idxB].getSkill();
+        cout << "masuk" << endl;
         // Singkirin skill yg g kompatibel
         int i = 0;
         while ((!skillsA.empty()) && (i< skillsA.size())) {
@@ -269,7 +269,9 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
                 i++;
             }
         }
+        cout << "masuk" << endl;
 
+        int debug = 0;
         while ((anak.getSkill().size() <= 4) && (!skillsA.empty()) && (!skillsB.empty())) {
             int skillAIdx = -1;
             if (!skillsA.empty()) {
@@ -327,6 +329,8 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
                     skillsB.erase(skillsB.begin() + skillBIdx);
                 }
             }
+            debug++;
+            cout << debug << endl;
         }
 
         // Tambahin anak ke list

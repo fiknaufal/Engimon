@@ -18,8 +18,10 @@ Map::Map(int n) : sg(){
     for (int i = 0; i<5; i++){
         addEngi();
     }
-    FireElectricmon f(3000, 0, 0);
+    Firemon f(3000, 0, 0);
+    Electricmon e(3000, 0, 0);
     player.addEngimon(f);
+    player.addEngimon(e);
     level = n;
     this->state = Jalan;
 }
@@ -56,11 +58,11 @@ void Map::gameFlow(){
                 cout << "Command tidak dikenali" << endl;
             }
         }else if (state == Bag){
-            cout << "--- BAG ---" << endl;
-            cout << "Available Commands:" << endl;
-            cout << "1. engimons: show engimons\n2. skillItems: show skill items\n3. close: close bag" << endl;
-            cout << "-----------" << endl;
             while (state == Bag){
+                cout << "--- BAG ---" << endl;
+                cout << "Available Commands:" << endl;
+                cout << "1. engimons: show engimons\n2. skillItems: show skill items\n3. chooseActive: pilih active engimon\n4. breed: Breed Engimon\n5.  close: close bag" << endl;
+                cout << "-----------" << endl;
                 cout << "command: ";
                 string cmdbag;
                 cin >> cmdbag;
@@ -69,7 +71,25 @@ void Map::gameFlow(){
                     player.showEngimonList();
                 }else if(cmdbag == "skillItems"){
                     player.showSkillItemList();
-                }else if (cmdbag == "close"){
+                }else if(cmdbag == "chooseActive"){
+                    player.showEngimonList();
+                    cout << "Pilih Active Engimon dengan nomor: " ;
+                    int idx;
+                    cin >> idx;
+                    cout << "\n";
+                    player.setActiveEngi(idx-1);
+                }else if (cmdbag == "breed"){
+                    player.showEngimonList();
+                    cout << "Pilih Engimon 1: " ;
+                    int idx1;
+                    cin >> idx1;
+                    cout << "Pilih Engimon 2: " ;
+                    int idx2;
+                    cin >> idx2;
+                    cout << "\n";
+                    player.breedEngimon(idx1-1, idx2-1);
+                }
+                else if (cmdbag == "close"){
                     state = Jalan;
                 }else{
                     cout << "Command tidak dikenali" << endl;
