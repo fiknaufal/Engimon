@@ -1,27 +1,26 @@
 #include "Player.hpp"
 #include "Engimon.hpp"
+#include "Inventory.hpp"
 using namespace std;
 #include <iostream>
 #include <string>
 #include <bits/stdc++.h>
 
-Player::Player(){
+Player::Player() : inventoryE(), inventoryS(){
     this->playerPos.setX(0);
     this->playerPos.setY(1);
     maxInv = 50;
-    inventoryE.reserve(maxInv);
-    inventoryS.reserve(maxInv);
     idActiveEngimon = 0;
 }
 
 Player::~Player(){}
 
 bool Player::lose(){
-    return inventoryE.size() == 0;
+    return inventoryE.getSize() == 0;
 }
 
 void Player::showActiveEngimon(){
-    inventoryE[idActiveEngimon].printData();
+    inventoryE.getVector()[idActiveEngimon].printData();
 }
 
 void Player::Move(const string &c){
@@ -72,7 +71,7 @@ void Player::MoveActiveEngi(){ // cek obstacle belom jadi
         cout << "anjir dikepung";
     }
     else{
-        inventoryE[idActiveEngimon].setEngimonPos(x1, y1);
+        inventoryE.getVector()[idActiveEngimon].setEngimonPos(x1, y1);
     }
     if(outidx){
         throw "bambang mau kemana sih\n";
@@ -84,12 +83,12 @@ Position& Player::getPlayerPos(){
 }
 
 int Player::getInvCount(){
-    return inventoryE.size() + inventoryS.size();
+    return inventoryE.getSize() + inventoryS.getSize();
 }
 
 bool Player::addEngimon(Engimon e){
     if(getInvCount() < maxInv){
-        inventoryE.push_back(e);
+        inventoryE.add(e);
         return 1;
     }
     else{
@@ -99,10 +98,10 @@ bool Player::addEngimon(Engimon e){
 
 bool Player::addSkillItem(SkillItem s){
     if(getInvCount() < maxInv){
-        vector<SkillItem>::iterator i = find(inventoryS.begin(), inventoryS.end(), s);
+        vector<SkillItem>::iterator i = find(inventoryS.getVector().begin(), inventoryS.getVector().end(), s);
 
-        if(i == inventoryS.end()){
-            inventoryS.push_back(s);
+        if(i == inventoryS.getVector().end()){
+            inventoryS.add(s);
         }
         else{
             i->add(1);
@@ -118,7 +117,7 @@ bool Player::addSkillItem(SkillItem s){
 void Player::showEngimonList(){
     int j = 1;
     cout << "List of Engimon" << endl;
-    for(auto i = inventoryE.begin(); i!= inventoryE.end(); ++i){
+    for(auto i = inventoryE.getVector().begin(); i!= inventoryE.getVector().end(); ++i){
         cout << j << ". " << i->getName() << " " << i->getSpecies() << " " << i->getLevel()<< endl;
         j++;
     }
@@ -127,14 +126,14 @@ void Player::showEngimonList(){
 void Player::showSkillItemList(){
     int j = 1;
     cout << "List of Skill Item" << endl;
-    for(auto i = inventoryS.begin(); i != inventoryS.end(); ++i){
+    for(auto i = inventoryS.getVector().begin(); i != inventoryS.getVector().end(); ++i){
         cout << j << ". " << i->getSkill().getSkillName() << " " << i->getJumlah() << endl;
         j++;
     }
 }
 
 void Player::setActiveEngi(int i){
-    if (i < inventoryE.size()){
+    if (i < inventoryE.getSize()){
         idActiveEngimon = i;
     }
     else{
@@ -144,7 +143,7 @@ void Player::setActiveEngi(int i){
 }
 
 void Player::petEngi(){
-    inventoryE[idActiveEngimon].printSound();
+    inventoryE.getVector()[idActiveEngimon].printSound();
 }
 
 bool Player::battle(Engimon e) {
@@ -152,19 +151,19 @@ bool Player::battle(Engimon e) {
     int powerE2 = 0;
 
     // Misalkan atribut skill udh ad di engimon
-    for (int i=0; i<inventoryE[idActiveEngimon].getSkill().size(); i++) {
-        powerE1 += inventoryE[idActiveEngimon].getSkill()[i].getBasePower() * inventoryE[idActiveEngimon].getSkill()[i].getMasteryLevel();
+    for (int i=0; i<inventoryE.getVector()[idActiveEngimon].getSkill().size(); i++) {
+        powerE1 += inventoryE.getVector()[idActiveEngimon].getSkill()[i].getBasePower() * inventoryE.getVector()[idActiveEngimon].getSkill()[i].getMasteryLevel();
     }
 
     for (int i=0; i<e.getSkill().size(); i++) {
         powerE2 += e.getSkill()[i].getBasePower() * e.getSkill()[i].getMasteryLevel();
     }
 
-    powerE1 += inventoryE[idActiveEngimon].getLevel() * inventoryE[idActiveEngimon].getElmtAdv(e);
-    powerE2 += e.getLevel() * e.getElmtAdv(inventoryE[idActiveEngimon]);
+    powerE1 += inventoryE.getVector()[idActiveEngimon].getLevel() * inventoryE.getVector()[idActiveEngimon].getElmtAdv(e);
+    powerE2 += e.getLevel() * e.getElmtAdv(inventoryE.getVector()[idActiveEngimon]);
 
     if (powerE1 < powerE2){
-        inventoryE.erase(inventoryE.begin()+idActiveEngimon);
+        inventoryE.removeAtIdx(idActiveEngimon);
     }
     return (powerE1 >= powerE2);
 }

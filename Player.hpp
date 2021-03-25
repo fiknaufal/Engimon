@@ -3,6 +3,7 @@
 #include "Position.hpp"
 #include "SkillItem.hpp"
 #include "Engimon.hpp"
+#include "Inventory.hpp"
 using namespace std;
 #include <string>
 #include <vector>
@@ -11,8 +12,8 @@ class Player
 {
 private:
     Position playerPos;
-    vector<Engimon> inventoryE;
-    vector<SkillItem> inventoryS;
+    Inventory<Engimon> inventoryE;
+    Inventory<SkillItem> inventoryS;
     int maxInv;
     // int banyakEngimon;
     int idActiveEngimon;
