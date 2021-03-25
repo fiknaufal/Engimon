@@ -217,6 +217,14 @@ void Map::addEngi(){
         int r = (rand()%30 + 1)*100;
         int x = rand()%mapMatrix[0].length(), y = rand()%mapMatrix.size();
         Engimon* w;
+        Position p(x, y);
+
+        while(!nobodyThere(p)){
+            x = rand()%mapMatrix[0].length();
+            y = rand()%mapMatrix.size();
+            p.setX(x);
+            p.setY(y);
+        }
 
         if (mapMatrix[y][x] == '+'){
             int e1 = rand()%4;
