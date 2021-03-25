@@ -3,12 +3,13 @@
 #include "Player.hpp"
 #include "skillgacha.hpp"
 #include <stdlib.h>
+#include <vector>
 
 enum gameState {Jalan, Battle, Bag, Exit};
 
 class Map{
     public:
-        Map(int n);
+        Map(int n, string namafile);
         ~Map();
     
         void show();
@@ -18,7 +19,7 @@ class Map{
         int idSurroundEnemy(); //ini belom
         bool isBattle(); //ini belom
     private:
-        char mapMatrix[15][15];
+        vector<string> mapMatrix;
         Player player;
         vector<Engimon> wildEngi;
         int level;

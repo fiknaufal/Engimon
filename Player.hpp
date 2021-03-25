@@ -25,6 +25,7 @@ public:
     void MoveActiveEngi();
     Position& getPlayerPos();
     int getInvCount();
+    Position getActivePos();
     bool addEngimon(Engimon);
     bool addSkillItem(SkillItem);
     void showEngimonList();

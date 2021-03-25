@@ -7,7 +7,7 @@ using namespace std;
 #include <bits/stdc++.h>
 
 Player::Player() : inventoryE(), inventoryS(){
-    this->playerPos.setX(0);
+    this->playerPos.setX(1);
     this->playerPos.setY(1);
     maxInv = 50;
     idActiveEngimon = 0;
@@ -24,31 +24,27 @@ void Player::showActiveEngimon(){
 }
 
 void Player::Move(const string &c){
+    inventoryE.getVector()[idActiveEngimon].setEngimonPos(playerPos.getX(), playerPos.getY());
     if (c == "w"){
-        if (this->playerPos.getY() < 14){
             int curY = this->playerPos.getY();
             this->playerPos.setY(curY+1);
-        }
     }
     if (c == "a"){
-        if (this->playerPos.getX() > 0){
             int curX = this->playerPos.getX();
             this->playerPos.setX(curX-1);
-        }
     }
     if (c == "s"){
-        if (this->playerPos.getY() > 0){
             int curY = this->playerPos.getY();
             this->playerPos.setY(curY-1);
-        }
     }
     if (c == "d"){
-        if (this->playerPos.getX() < 14){
             int curX = this->playerPos.getX();
             this->playerPos.setX(curX+1);
-        }
     }
-    MoveActiveEngi();
+}
+
+Position Player::getActivePos(){
+    return inventoryE.getVector()[idActiveEngimon].getEngimonPos();
 }
 
 void Player::MoveActiveEngi(){ // cek obstacle belom jadi
@@ -164,6 +160,13 @@ bool Player::battle(Engimon e) {
 
     if (powerE1 < powerE2){
         inventoryE.removeAtIdx(idActiveEngimon);
+    }else{
+        inventoryE.getVector()[idActiveEngimon].plusExp(50);
+        if (inventoryE.getVector()[idActiveEngimon].getCml() >= 4000){
+            inventoryE.removeAtIdx(idActiveEngimon);
+            setActiveEngi(0);
+            cout << "Active Engimon mati karena melampaui batas level maksimal!\nActive Engimon sekarang adalah Engimon teratas di list." << endl;
+        }
     }
     return (powerE1 >= powerE2);
 }
@@ -345,5 +348,7 @@ void Player::breedEngimon (int idxA, int idxB) {
 
         // Tambahin anak ke list
         addEngimon(anak);
+        inventoryE.getVector()[idxA].setLevelAfterBreeding();
+        inventoryE.getVector()[idxB].setLevelAfterBreeding();
     }
 }

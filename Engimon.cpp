@@ -86,6 +86,10 @@ string Engimon::getSpecies(){
     return species;
 }
 
+int Engimon::getCml(){
+    return cumulativeExp;
+}
+
 void Engimon::plusExp(int i){
     exp += i;
     cumulativeExp += i;

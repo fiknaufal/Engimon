@@ -28,6 +28,7 @@ public:
     Engimon(string name, string p1name, string p2name, string p1spc, string p2spc, string spc, int exp, Element e1, Element e2, int px, int py, string sound);
     virtual ~Engimon();
     int getLevel();
+    int getCml();
     double getElmtAdv(const Engimon& lawan);
 
     Position& getEngimonPos();

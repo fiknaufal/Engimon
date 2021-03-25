@@ -23,7 +23,7 @@ skillgacha::~skillgacha(){}
 
 Skill skillgacha::getRandomSkill(Element e1, Element e2){
     if (e2 == None){
-        return skillDB[e1+1];
+        return skillDB[e1];
     }
     else{
         if (e2 == Electric){

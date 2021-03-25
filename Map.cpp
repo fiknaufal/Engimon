@@ -1,23 +1,24 @@
 #include "Map.hpp"
 #include <iostream>
+#include <fstream>
 using namespace std;
 
-Map::Map(int n) : sg(){
-    for (int i = 0; i < 15; i++){
-        for (int j = 0; j < 15; j++){
-            this->mapMatrix[i][j] = '-';
-        }
-    }
+Map::Map(int n, string namafile) : sg(){
 
-    for (int i = 0; i < 8; i++){
-        for (int j = 7; j < 15; j++){
-            this->mapMatrix[i][j] = '+';
+    fstream mapfile;
+    mapfile.open(namafile,ios::in);
+    if (mapfile.is_open()){
+        string line;
+        while(getline(mapfile, line)){
+            mapMatrix.push_back(line);
         }
     }
     wildEngi.reserve(10);
-    for (int i = 0; i<5; i++){
+
+    while (wildEngi.size() < 5){
         addEngi();
     }
+
     Firemon f(3000, 0, 0);
     Electricmon e(3000, 0, 0);
     player.addEngimon(f);
@@ -26,7 +27,9 @@ Map::Map(int n) : sg(){
     this->state = Jalan;
 }
 
-Map::~Map(){}
+Map::~Map(){
+
+}
 
 void Map::gameFlow(){
     string cmd;
@@ -45,7 +48,23 @@ void Map::gameFlow(){
             cin >> cmd;
             cout << "\n";
             if (cmd == "w"||cmd == "a"||cmd == "s"||cmd == "d"){
-                player.Move(cmd);
+                if (cmd == "w"){
+                    if (player.getPlayerPos().getY() < mapMatrix.size()-1){
+                        player.Move(cmd);
+                    }
+                }else if (cmd == "a"){
+                    if (player.getPlayerPos().getX() > 0){
+                        player.Move(cmd);
+                    }
+                }else if (cmd == "s"){
+                    if (player.getPlayerPos().getY() > 0){
+                        player.Move(cmd);
+                    }
+                }else{
+                    if (player.getPlayerPos().getX() < mapMatrix[0].length()-1){
+                        player.Move(cmd);
+                    }
+                }
             }else if (cmd == "bag"){
                 state = Bag;
             }else if (cmd == "show"){
@@ -168,58 +187,69 @@ int Map::idSurroundEnemy(){
 }
 
 void Map::show(){
-    char maps[15][15];
-
-    for (int i = 14; i >= 0; i--){
-        for (int j = 0; j < 15; j++){
+    char maps[mapMatrix.size()][mapMatrix[0].length()];
+    cout << "masuk" << endl;
+    for (int i = mapMatrix.size()-1; i >= 0; i--){
+        for (int j = 0; j < mapMatrix[0].length(); j++){
             maps[i][j] = mapMatrix[i][j];
         }
     }
-
+    cout << "masuk" << endl;
     maps[player.getPlayerPos().getY()][player.getPlayerPos().getX()] = 'P';
+    maps[player.getActivePos().getY()][player.getActivePos().getX()] = 'X';
     for(int i = 0; i < wildEngi.size(); i++){
         maps[wildEngi[i].getEngimonPos().getY()][wildEngi[i].getEngimonPos().getX()] = wildEngi[i].getMapSymbol(level);
     }
-
-    for (int i = 14; i >= 0; i--){
-        for (int j = 0; j < 15; j++){
+    cout << "masuk" << endl;
+    for (int i = mapMatrix.size()-1; i >= 0; i--){
+        for (int j = 0; j < mapMatrix[0].length(); j++){
             cout << maps[i][j];
         }
         cout << endl;
     }
+    cout << "masuk" << endl;
 }
 
 void Map::addEngi(){
     if(wildEngi.size() < 10){
-        int r = (rand()%30 + 1)*100, r1 = rand()%8;
-        int x = rand()%15, y = rand()%15;
+        int r = (rand()%30 + 1)*100;
+        int x = rand()%mapMatrix[0].length(), y = rand()%mapMatrix.size();
         Engimon* w;
-        switch(r1){
-            case 0:
-                w = new Firemon(r, x, y);
-                break;
-            case 1:
-                w = new Watermon(r, x, y);
-                break;
-            case 2:
-                w = new Electricmon(r, x, y);
-                break;
-            case 3:
-                w = new Groundmon(r, x, y);
-                break;
-            case 4:
-                w = new Icemon(r, x, y);
-                break;
-            case 5:
-                w = new FireElectricmon(r, x, y);
-                break;
-            case 6:
-                w = new WaterIcemon(r, x, y);
-                break;
-            case 7:
-                w = new WaterGroundmon(r, x, y);
-                break;
+
+        if (mapMatrix[y][x] == '+'){
+            int e1 = rand()%4;
+            switch(e1){
+                case 0:
+                    w = new Watermon(r, x, y);
+                    break;
+                case 1:
+                    w = new Icemon(r, x, y);
+                    break;
+                case 2:
+                    w = new WaterIcemon(r, x, y);
+                    break;
+                case 3:
+                    w = new WaterGroundmon(r, x, y);
+                    break;
+            }
+            wildEngi.push_back(*w);
+        } else if(mapMatrix[y][x] == '-'){
+            int e2 = rand()%4;
+            switch(e2){
+                case 0:
+                    w = new Firemon(r, x, y);
+                    break;
+                case 1:
+                    w = new Groundmon(r, x, y);
+                    break;
+                case 2:
+                    w = new Electricmon(r, x, y);
+                    break;
+                case 3:
+                    w = new FireElectricmon(r, x, y);
+                    break;
+            }
+            wildEngi.push_back(*w);
         }
-        wildEngi.push_back(*w);
     }
 }
