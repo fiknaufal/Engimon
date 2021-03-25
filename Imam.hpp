@@ -114,8 +114,8 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
         Engimon anak = Engimon(childName, A.getName(), B.getName(), A.getSpecies(), B.getSpecies(), spc, 0, childElmt[0], childElmt[1], -1, -1, sound);
 
         // Masukin skill-skill nya
-        vector<Skill> skillsA = A.getSkill();
-        vector<Skill> skillsB = B.getSkill();
+        vector<Skill> skillsA (A.getSkill());
+        vector<Skill> skillsB (B.getSkill());
 
         // Singkirin skill yg g kompatibel
         int i = 0;
@@ -143,7 +143,8 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
             }
         }
 
-        while ((anak.getSkill().size() <= 4) && (!skillsA.empty()) && (!skillsB.empty())) {
+        
+        while ((anak.getSkill().size() <= 4) && (!skillsA.empty() || !skillsB.empty())) {
             int skillAIdx = -1;
             if (!skillsA.empty()) {
                 for(int i=0; i<skillsA.size(); i++) {
@@ -185,6 +186,10 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
                         anak.addSkill(upgradedSkill);
                         skillsA.erase(skillsA.begin() + skillAIdx);
                         skillsB.erase(skillsB.begin() + skillBIdx);
+                    }
+                    else {
+                        anak.addSkill(skillsA[skillAIdx]);
+                        skillsA.erase(skillsA.begin() + skillAIdx);
                     }
                 }
             }
