@@ -102,9 +102,9 @@ void Engimon::printData(){
     cout << "Nama: " << name << endl;
     cout << "Parent 1: " << parentNames[0] << " species " << parentSpecies[0] << endl;
     cout << "Parent 2: " << parentNames[1] << " species " << parentSpecies[1] << endl;
-    cout << "Element: " << elements[0] << "/" << elements[1] << endl;
+    cout << "Element: " << getElementName(elements[0]) << "/" << getElementName(elements[1]) << endl;
     cout << "level: " << getLevel() << endl;
-    cout << "experience: " << exp << endl;
+    cout << "experience: " << exp%100 << endl;
     cout << "Cumulative Experience: " << cumulativeExp << endl;
     printSkills();
 }
@@ -161,6 +161,30 @@ Position Engimon::randomMove(int n){
         p.setY(y-1);
     }
     return p;
+}
+
+string Engimon::getElementName(Element e){
+    if(e == None){
+        return "None";
+    }
+    if(e == Fire){
+        return "Fire";
+    }
+    if(e == Electric){
+        return "Electric";
+    }
+    if(e == Ground){
+        return "Ground";
+    }
+    if(e == Water){
+        return "Water";
+    }
+    if(e == Ice){
+        return "Ice";
+    }
+    else{
+        return "Gaada bang";
+    }
 }
 
 Firemon::Firemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :

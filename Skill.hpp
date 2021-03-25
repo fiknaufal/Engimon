@@ -7,7 +7,7 @@ using namespace std;
 enum Element { None, Fire, Water, Electric, Ground, Ice };
 
 class Skill {
-    
+
     private:
         string skillName;
         int basePower;

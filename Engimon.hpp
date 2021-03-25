@@ -47,9 +47,8 @@ public:
     char getMapSymbol(int);
     vector<Skill> getSkill();
     Position randomMove(int);
+    string getElementName(Element);
 };
-
-
 
 class Firemon : public Engimon{
 public:
