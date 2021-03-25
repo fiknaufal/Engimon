@@ -24,7 +24,7 @@ Engimon::Engimon(string names, string p1name, string p2name, string p1spc, strin
 Engimon::~Engimon(){}
 
 int Engimon::getLevel(){
-    return exp % 100;
+    return exp / 100;
 }
 
 bool Engimon::addSkill(const Skill& sk){

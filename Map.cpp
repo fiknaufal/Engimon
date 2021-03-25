@@ -34,12 +34,14 @@ void Map::gameFlow(){
         }
         if (state == Jalan){
             show();
+            cout << "\n";
             cout << "--------------------" << endl;
             cout << "Available Commands:" << endl;
             cout << "1. w,a,s,d: Move\n2. bag: Open Bag\n3. show: Show Active Engimon\n4. pet: Pet Active Engimon\n5. exit: Exit the game" << endl;
             cout << "--------------------" << endl;
             cout << "command: ";
             cin >> cmd;
+            cout << "\n";
             if (cmd == "w"||cmd == "a"||cmd == "s"||cmd == "d"){
                 player.Move(cmd);
             }else if (cmd == "bag"){
@@ -62,6 +64,7 @@ void Map::gameFlow(){
                 cout << "command: ";
                 string cmdbag;
                 cin >> cmdbag;
+                cout << "\n";
                 if (cmdbag == "engimons"){
                     player.showEngimonList();
                 }else if(cmdbag == "skillItems"){
@@ -74,7 +77,9 @@ void Map::gameFlow(){
             }
 
         }else if (state == Battle){
+            cout << "\n";
             show();
+            cout << "\n";
             cout << "You are battling:" << endl;
             wildEngi[idSurroundEnemy()].printData();
             cout << "Battle result:" << endl;
@@ -99,7 +104,7 @@ void Map::gameFlow(){
                     cout << "Pilih engimon nomor: " << endl;
                     int id;
                     cin >> id;
-                    player.setActiveEngi(id);
+                    player.setActiveEngi(id-1);
                 }
             }
         }
@@ -117,7 +122,7 @@ bool Map::isBattle(){
         if (player.getPlayerPos().getY()-1 == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX() == wildEngi[i].getEngimonPos().getX()){
             return true;
         }
-        if (player.getPlayerPos().getY()-1 == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX() == wildEngi[i].getEngimonPos().getX()){
+        if (player.getPlayerPos().getY() == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX()-1 == wildEngi[i].getEngimonPos().getX()){
             return true;
         }
     }
@@ -135,7 +140,7 @@ int Map::idSurroundEnemy(){
         if (player.getPlayerPos().getY()-1 == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX() == wildEngi[i].getEngimonPos().getX()){
             return i;
         }
-        if (player.getPlayerPos().getY()-1 == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX() == wildEngi[i].getEngimonPos().getX()){
+        if (player.getPlayerPos().getY() == wildEngi[i].getEngimonPos().getY() && player.getPlayerPos().getX()-1 == wildEngi[i].getEngimonPos().getX()){
             return i;
         }
     }

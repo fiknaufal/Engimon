@@ -119,13 +119,13 @@ void Player::showEngimonList(){
     int j = 1;
     cout << "List of Engimon" << endl;
     for(auto i = inventoryE.begin(); i!= inventoryE.end(); ++i){
-        cout << j << ". " << i->getName() << " " << i->getSpecies() << endl;
+        cout << j << ". " << i->getName() << " " << i->getSpecies() << " " << i->getLevel()<< endl;
         j++;
     }
 }
 
 void Player::showSkillItemList(){
-    int j = 0;
+    int j = 1;
     cout << "List of Skill Item" << endl;
     for(auto i = inventoryS.begin(); i != inventoryS.end(); ++i){
         cout << j << ". " << i->getSkill().getSkillName() << " " << i->getJumlah() << endl;
