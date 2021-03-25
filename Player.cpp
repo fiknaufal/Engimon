@@ -248,12 +248,15 @@ void Player::breedEngimon (int idxA, int idxB) {
         // Singkirin skill yg g kompatibel
         int i = 0;
         while ((!skillsA.empty()) && (i< skillsA.size())) {
-            if ((skillsA[i].getElement()[0] != childElmt[0]) && 
-                (skillsA[i].getElement()[1] != childElmt[0]) && 
-                (skillsA[i].getElement()[0] != childElmt[1]) && 
-                (skillsA[i].getElement()[1] != childElmt[1])) {
-                    skillsA.erase(skillsA.begin() + i);
-                }
+            bool compatible = false;
+            for (Element e : skillsA[i].getElement()) {
+                if ((e == childElmt[0]) || (e == childElmt[1]))
+                    compatible = true;
+            }
+
+            if (!compatible) {
+                skillsA.erase(skillsA.begin() + i);
+            }
             else {
                 i++;
             }
@@ -261,12 +264,15 @@ void Player::breedEngimon (int idxA, int idxB) {
 
         i = 0;
         while ((!skillsB.empty()) && (i < skillsB.size())) {
-            if ((skillsB[i].getElement()[0] != childElmt[0]) && 
-                (skillsB[i].getElement()[1] != childElmt[0]) && 
-                (skillsB[i].getElement()[0] != childElmt[1]) && 
-                (skillsB[i].getElement()[1] != childElmt[1])) {
-                    skillsB.erase(skillsB.begin() + i);
-                }
+            bool compatible = false;
+            for (Element e : skillsB[i].getElement()) {
+                if ((e == childElmt[0]) || (e == childElmt[1]))
+                    compatible = true;
+            }
+
+            if (!compatible) {
+                skillsB.erase(skillsB.begin() + i);
+            }
             else {
                 i++;
             }
