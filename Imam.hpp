@@ -105,10 +105,15 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
             }
         }
 
+        string As;
+
         // Masukin nama
         string childName;
         cout << "Your new engimon name: ";
         cin >> childName;
+
+        cout << "TEST BUAT ANAK" << endl;
+        cin >> As;
 
         // Buat objek Engimon baru dgn element dan nama diatas
         Engimon anak = Engimon(childName, A.getName(), B.getName(), A.getSpecies(), B.getSpecies(), spc, 0, childElmt[0], childElmt[1], -1, -1, sound);
@@ -116,6 +121,10 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
         // Masukin skill-skill nya
         vector<Skill> skillsA (A.getSkill());
         vector<Skill> skillsB (B.getSkill());
+
+        cout << "TEST MASUK SKILL2AN" << endl;
+
+        cin >> As;
 
         // Singkirin skill yg g kompatibel
         int i = 0;
@@ -130,6 +139,8 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
                 i++;
             }
         }
+        cout << "TEST ILANGIN SKILL A" << endl;
+
         i = 0;
         while ((!skillsB.empty()) && (i < skillsB.size())) {
             if ((skillsB[i].getElement()[0] != childElmt[0]) && 
@@ -142,6 +153,9 @@ void Player::breedEngimon (Engimon& A, Engimon& B) {
                 i++;
             }
         }
+        cout << "TEST ILANGIN SKILL B" << endl;
+
+        cin >> A;
 
         
         while ((anak.getSkill().size() <= 4) && (!skillsA.empty() || !skillsB.empty())) {

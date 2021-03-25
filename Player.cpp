@@ -238,12 +238,13 @@ void Player::breedEngimon (int idxA, int idxB) {
         cin >> childName;
 
         // Buat objek Engimon baru dgn element dan nama diatas
-        Engimon anak(childName, inventoryE.getVector()[idxA].getName(), inventoryE.getVector()[idxB].getName(), inventoryE.getVector()[idxA].getSpecies(), inventoryE.getVector()[idxB].getSpecies(), spc, 0, childElmt[0], childElmt[1], -1, -1, sound);
-        cout << "masuk" << endl;
+        Engimon anak = Engimon(childName, inventoryE.getVector()[idxA].getName(), inventoryE.getVector()[idxB].getName(), inventoryE.getVector()[idxA].getSpecies(), inventoryE.getVector()[idxB].getSpecies(), spc, 0, childElmt[0], childElmt[1], -1, -1, sound);
+
         // Masukin skill-skill nya
-        vector<Skill> skillsA = inventoryE.getVector()[idxA].getSkill();
-        vector<Skill> skillsB = inventoryE.getVector()[idxB].getSkill();
-        cout << "masuk" << endl;
+        vector<Skill> skillsA (inventoryE.getVector()[idxA].getSkill());
+        vector<Skill> skillsB (inventoryE.getVector()[idxB].getSkill());
+
+
         // Singkirin skill yg g kompatibel
         int i = 0;
         while ((!skillsA.empty()) && (i< skillsA.size())) {
@@ -257,6 +258,7 @@ void Player::breedEngimon (int idxA, int idxB) {
                 i++;
             }
         }
+
         i = 0;
         while ((!skillsB.empty()) && (i < skillsB.size())) {
             if ((skillsB[i].getElement()[0] != childElmt[0]) && 
@@ -269,10 +271,9 @@ void Player::breedEngimon (int idxA, int idxB) {
                 i++;
             }
         }
-        cout << "masuk" << endl;
 
-        int debug = 0;
-        while ((anak.getSkill().size() <= 4) && (!skillsA.empty()) && (!skillsB.empty())) {
+        
+        while ((anak.getSkill().size() <= 4) && (!skillsA.empty() || !skillsB.empty())) {
             int skillAIdx = -1;
             if (!skillsA.empty()) {
                 for(int i=0; i<skillsA.size(); i++) {
@@ -315,6 +316,10 @@ void Player::breedEngimon (int idxA, int idxB) {
                         skillsA.erase(skillsA.begin() + skillAIdx);
                         skillsB.erase(skillsB.begin() + skillBIdx);
                     }
+                    else {
+                        anak.addSkill(skillsA[skillAIdx]);
+                        skillsA.erase(skillsA.begin() + skillAIdx);
+                    }
                 }
             }
 
@@ -329,9 +334,8 @@ void Player::breedEngimon (int idxA, int idxB) {
                     skillsB.erase(skillsB.begin() + skillBIdx);
                 }
             }
-            debug++;
-            cout << debug << endl;
         }
+
 
         // Tambahin anak ke list
         addEngimon(anak);
