@@ -21,6 +21,20 @@ Engimon::Engimon(string names, string p1name, string p2name, string p1spc, strin
     species = spc;
 }
 
+Engimon::Engimon(const Engimon& other) {
+    name = other.name;
+    parentNames[0] = other.parentNames[0];
+    parentNames[1] = other.parentNames[1];
+    parentSpecies[0] = other.parentSpecies[0];
+    parentSpecies[1] = other.parentSpecies[1];
+    exp = other.exp;
+    cumulativeExp = other.cumulativeExp;
+    elements[0] = other.elements[0];
+    elements[1] = other.elements[1];
+    sound = other.sound;
+    species = other.species;
+}
+
 Engimon::~Engimon(){}
 
 int Engimon::getLevel(){
@@ -116,6 +130,10 @@ void Engimon::printSkills(){
         cout << "   Base Power: "<< skill[i].getBasePower() << endl;
         cout << "   Mastery   : "<< skill[i].getMasteryLevel() << endl;
     }
+}
+
+void Engimon::setElement2(Element el) {
+    elements[1] = el;
 }
 
 Element Engimon::getElement1(){

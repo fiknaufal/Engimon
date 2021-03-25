@@ -26,6 +26,7 @@ private:
 
 public:
     Engimon(string name, string p1name, string p2name, string p1spc, string p2spc, string spc, int exp, Element e1, Element e2, int px, int py, string sound);
+    Engimon(const Engimon& other);
     virtual ~Engimon();
     int getLevel();
     int getCml();
@@ -39,6 +40,7 @@ public:
     void printSkills();
     void plusExp(int exp);
     bool addSkill(const Skill& sk);
+    void setElement2(Element);
     string getName();
     string getSpecies();
     string getSound();

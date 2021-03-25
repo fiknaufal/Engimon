@@ -191,38 +191,45 @@ void Player::breedEngimon (int idxA, int idxB) {
     else if (this->getInvCount() > maxInv)
         cout << "Inventory penuh" << endl;
 
+    /*
     // Cek elemen ortu dual atau g, mungkin di-g bisa dlu-in
     else if ((inventoryE.getVector()[idxA].getElement2() != None) || (inventoryE.getVector()[idxB].getElement2() != None))
         cout << "Dual elmt engimon g punya kelamin" << endl;
+    */
 
     else {
+        Engimon engiA(inventoryE.getVector()[idxA]);
+        engiA.setElement2(None);
+        Engimon engiB(inventoryE.getVector()[idxB]);
+        engiB.setElement2(None);
+
         Element childElmt[2] = {None, None};
         string spc; string sound;
-        if (inventoryE.getVector()[idxA].getElmtAdv(inventoryE.getVector()[idxB]) > 1) {
-            childElmt[0] = inventoryE.getVector()[idxA].getElement1();
-            spc = inventoryE.getVector()[idxA].getSpecies();
-            sound = inventoryE.getVector()[idxA].getSound();
+        if (engiA.getElmtAdv(engiB) > 1) {
+            childElmt[0] = engiA.getElement1();
+            spc = engiA.getSpecies();
+            sound = engiA.getSound();
 
             breedingCase = 0;
         }
-        else if (inventoryE.getVector()[idxB].getElmtAdv(inventoryE.getVector()[idxA]) > 1) {
-            childElmt[0] = inventoryE.getVector()[idxB].getElement1();
-            spc = inventoryE.getVector()[idxB].getSpecies();
-            sound = inventoryE.getVector()[idxB].getSound();
+        else if (engiB.getElmtAdv(engiA) > 1) {
+            childElmt[0] = engiB.getElement1();
+            spc = engiB.getSpecies();
+            sound = engiB.getSound();
 
             breedingCase = 1;
         }
         else {
-            if (inventoryE.getVector()[idxA].getElement1() == inventoryE.getVector()[idxB].getElement1()) {
-                childElmt[0] = inventoryE.getVector()[idxA].getElement1();
-                spc = inventoryE.getVector()[idxA].getSpecies();
-                sound = inventoryE.getVector()[idxA].getSound();
+            if (engiA.getElement1() == engiB.getElement1()) {
+                childElmt[0] = engiA.getElement1();
+                spc = engiA.getSpecies();
+                sound = engiA.getSound();
 
                 breedingCase = 2;
             }
             else {
-                childElmt[0] = min(inventoryE.getVector()[idxA].getElement1(), inventoryE.getVector()[idxB].getElement1());
-                childElmt[1] = max(inventoryE.getVector()[idxA].getElement1(), inventoryE.getVector()[idxB].getElement1());
+                childElmt[0] = min(engiA.getElement1(), engiB.getElement1());
+                childElmt[1] = max(engiA.getElement1(), engiB.getElement1());
                 if (childElmt[0] == Fire) {
                     spc = "FireElectricmon";
                 }
@@ -234,7 +241,7 @@ void Player::breedEngimon (int idxA, int idxB) {
                         spc = "WaterGroundmon";
                     }
                 }
-                sound = inventoryE.getVector()[idxA].getSound();
+                sound = engiA.getSound();
 
                 breedingCase = 3;
             }
@@ -246,11 +253,11 @@ void Player::breedEngimon (int idxA, int idxB) {
         cin >> childName;
 
         // Buat objek Engimon baru dgn element dan nama diatas
-        Engimon anak = Engimon(childName, inventoryE.getVector()[idxA].getName(), inventoryE.getVector()[idxB].getName(), inventoryE.getVector()[idxA].getSpecies(), inventoryE.getVector()[idxB].getSpecies(), spc, 0, childElmt[0], childElmt[1], -1, -1, sound);
+        Engimon anak = Engimon(childName, engiA.getName(), engiB.getName(), engiA.getSpecies(), engiB.getSpecies(), spc, 0, childElmt[0], childElmt[1], -1, -1, sound);
 
         // Masukin skill-skill nya
-        vector<Skill> skillsA (inventoryE.getVector()[idxA].getSkill());
-        vector<Skill> skillsB (inventoryE.getVector()[idxB].getSkill());
+        vector<Skill> skillsA (engiA.getSkill());
+        vector<Skill> skillsB (engiB.getSkill());
 
 
         // Singkirin skill yg g kompatibel
