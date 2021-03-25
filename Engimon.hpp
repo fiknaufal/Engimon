@@ -46,6 +46,7 @@ public:
     Element getElement2();
     char getMapSymbol(int);
     vector<Skill> getSkill();
+    Position randomMove(int);
 };
 
 

@@ -145,6 +145,24 @@ vector<Skill> Engimon::getSkill(){
     return this->skill;
 }
 
+Position Engimon::randomMove(int n){
+    int x = engimonPos.getX(), y = engimonPos.getY();
+    Position p(x, y);
+    if(n == 1){
+        p.setX(x+1);
+    }
+    else if(n == 2){
+        p.setX(x-1);
+    }
+    else if(n==3){
+        p.setY(y+1);
+    }
+    else if(n==4){
+        p.setY(y-1);
+    }
+    return p;
+}
+
 Firemon::Firemon(string name, string p1name, string p2name, string p1spc, string p2spc, int exp, int px, int py) :
 Engimon(name, p1name, p2name, p1spc, p2spc,"Firemon", exp, Fire, None, px, py, "ROARRR"){
     skillgacha sg;

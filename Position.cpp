@@ -37,3 +37,4 @@ void Position::setY(int y){
 bool Position::operator==(const Position &p){
     return (this->x == p.x && this->y == p.y);
 }
+

@@ -65,6 +65,7 @@ void Map::gameFlow(){
                         player.Move(cmd);
                     }
                 }
+                randomiseEnemyMovement();
             }else if (cmd == "bag"){
                 state = Bag;
             }else if (cmd == "show"){
@@ -252,4 +253,47 @@ void Map::addEngi(){
             wildEngi.push_back(*w);
         }
     }
+}
+
+void Map::randomiseEnemyMovement(){
+    int r;
+    Position p;
+    for(int i = 0; i < wildEngi.size(); i++){
+        r = rand()%4 + 1;
+        p = wildEngi[i].randomMove(r);
+        if(isInMap(p) && canEngimonWalk(wildEngi[i], p) && nobodyThere(p)){
+            wildEngi[i].setEngimonPos(p.getX(), p.getY());
+        }
+    }
+}
+bool Map::canEngimonWalk(Engimon e, Position p){
+    Element e1 = e.getElement1(), e2 = e.getElement2();
+    char alas = mapMatrix[p.getY()][p.getX()];
+    if(alas == '-'){
+        if(e1==Fire || e1 == Electric || e1 == Ground || e2==Fire || e2 == Electric || e2 == Ground){
+            return true;
+        }
+    }
+    else{
+        if(e1==Water || e1 ==Ice || e2==Water || e2 ==Ice){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Map::nobodyThere(Position p){
+    if(p == player.getPlayerPos()){
+        return false;
+    }
+    for(int i = 0; i < wildEngi.size(); i++){
+        if(p == wildEngi[i].getEngimonPos()){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Map::isInMap(Position p){
+    return p.getX() >= 0 && p.getX() < mapMatrix[0].length() && p.getY() >= 0 && p.getY() < mapMatrix.size();
 }

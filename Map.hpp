@@ -11,13 +11,16 @@ class Map{
     public:
         Map(int n, string namafile);
         ~Map();
-    
+
         void show();
         void addEngi();
         void randomiseEnemyMovement();
         void gameFlow();
-        int idSurroundEnemy(); //ini belom
-        bool isBattle(); //ini belom
+        int idSurroundEnemy();
+        bool isBattle();
+        bool canEngimonWalk(Engimon e, Position p);
+        bool nobodyThere(Position p);
+        bool isInMap(Position p);
     private:
         vector<string> mapMatrix;
         Player player;

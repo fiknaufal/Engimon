@@ -37,6 +37,7 @@ public:
     void breedEngimon(int idxA, int idxB);
     bool battle(Engimon e);
     bool lose();
+    void updateSkillItem();
 
 };
 

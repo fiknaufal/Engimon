@@ -79,7 +79,12 @@ Position& Player::getPlayerPos(){
 }
 
 int Player::getInvCount(){
-    return inventoryE.getSize() + inventoryS.getSize();
+    int n = 0;
+    vector<SkillItem> v = inventoryS.getVector();
+    for(int i = 0; i < v.size(); i++){
+        n += v[i].getJumlah();
+    }
+    return inventoryE.getSize() + n;
 }
 
 bool Player::addEngimon(Engimon e){
@@ -178,12 +183,12 @@ void Player::breedEngimon (int idxA, int idxB) {
     int breedingCase = -1;
 
     // Cek level ortu
-    if ((inventoryE.getVector()[idxA].getLevel() < 30) && (inventoryE.getVector()[idxB].getLevel() < 30)) 
+    if ((inventoryE.getVector()[idxA].getLevel() < 30) && (inventoryE.getVector()[idxB].getLevel() < 30))
         // Bingung antara throw atau munculin output aj
         cout << "Level ortu g cukup" << endl;
 
     // Cek muat atau g list engimon player (Blom bise diimplementasiin)
-    else if (this->getInvCount() > maxInv) 
+    else if (this->getInvCount() > maxInv)
         cout << "Inventory penuh" << endl;
 
     // Cek elemen ortu dual atau g, mungkin di-g bisa dlu-in
@@ -197,7 +202,7 @@ void Player::breedEngimon (int idxA, int idxB) {
             childElmt[0] = inventoryE.getVector()[idxA].getElement1();
             spc = inventoryE.getVector()[idxA].getSpecies();
             sound = inventoryE.getVector()[idxA].getSound();
-            
+
             breedingCase = 0;
         }
         else if (inventoryE.getVector()[idxB].getElmtAdv(inventoryE.getVector()[idxA]) > 1) {
@@ -281,7 +286,7 @@ void Player::breedEngimon (int idxA, int idxB) {
             }
         }
 
-        
+
         while ((anak.getSkill().size() <= 4) && (!skillsA.empty() || !skillsB.empty())) {
             int skillAIdx = -1;
             if (!skillsA.empty()) {
@@ -350,5 +355,17 @@ void Player::breedEngimon (int idxA, int idxB) {
         addEngimon(anak);
         inventoryE.getVector()[idxA].setLevelAfterBreeding();
         inventoryE.getVector()[idxB].setLevelAfterBreeding();
+    }
+}
+
+void Player::updateSkillItem(){
+    int i = 0;
+    while(i < inventoryS.getSize()){
+        if(inventoryS.getElement(i).getJumlah() == 0){
+            inventoryS.removeAtIdx(i);
+        }
+        else{
+            i++;
+        }
     }
 }

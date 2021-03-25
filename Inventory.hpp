@@ -16,6 +16,7 @@ public:
     void add(T);
     void removeAtIdx(int n);
     int getSize();
+    T getElement(int);
 };
 
 template <typename T>
@@ -42,6 +43,11 @@ void Inventory<T>::removeAtIdx(int n){
 template <typename T>
 int Inventory<T>::getSize(){
     return this->list.size();
+}
+
+template <typename T>
+T Inventory<T>::getElement(int i){
+    return list[i];
 }
 
 
