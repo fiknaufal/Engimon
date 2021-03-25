@@ -33,6 +33,7 @@ Map::~Map(){
 
 void Map::gameFlow(){
     string cmd;
+    srand(time(0));
     while (state != Exit && !player.lose()){
         if (isBattle()){
             this->state = Battle;
@@ -256,12 +257,13 @@ void Map::addEngi(){
 }
 
 void Map::randomiseEnemyMovement(){
-    int r;
+    int r, m;
     Position p;
     for(int i = 0; i < wildEngi.size(); i++){
         r = rand()%4 + 1;
+        m = rand()%3;
         p = wildEngi[i].randomMove(r);
-        if(isInMap(p) && canEngimonWalk(wildEngi[i], p) && nobodyThere(p)){
+        if(m==0 && isInMap(p) && canEngimonWalk(wildEngi[i], p) && nobodyThere(p)){
             wildEngi[i].setEngimonPos(p.getX(), p.getY());
         }
     }

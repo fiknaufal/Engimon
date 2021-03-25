@@ -33,6 +33,7 @@ Engimon::Engimon(const Engimon& other) {
     elements[1] = other.elements[1];
     sound = other.sound;
     species = other.species;
+    engimonPos = other.engimonPos;
 }
 
 Engimon::~Engimon(){}
