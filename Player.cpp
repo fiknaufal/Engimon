@@ -193,7 +193,7 @@ void Player::breedEngimon (int idxA, int idxB) {
     int breedingCase = -1;
 
     // Cek level ortu
-    if ((inventoryE.getVector()[idxA].getLevel() < 30) && (inventoryE.getVector()[idxB].getLevel() < 30))
+    if ((inventoryE.getVector()[idxA].getLevel() <= 30) || (inventoryE.getVector()[idxB].getLevel() <= 30))
         // Bingung antara throw atau munculin output aj
         cout << "Level Engimon belum cukup" << endl;
 
@@ -263,7 +263,7 @@ void Player::breedEngimon (int idxA, int idxB) {
         cin >> childName;
 
         // Buat objek Engimon baru dgn element dan nama diatas
-        Engimon anak = Engimon(childName, engiA.getName(), engiB.getName(), engiA.getSpecies(), engiB.getSpecies(), spc, 0, childElmt[0], childElmt[1], -1, -1, sound);
+        Engimon anak = Engimon(childName, engiA.getName(), engiB.getName(), engiA.getSpecies(), engiB.getSpecies(), spc, 100, childElmt[0], childElmt[1], -1, -1, sound);
 
         // Masukin skill-skill nya
         vector<Skill> skillsA (engiA.getSkill());
