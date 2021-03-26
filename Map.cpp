@@ -3,7 +3,7 @@
 #include <fstream>
 using namespace std;
 
-Map::Map(int n, string namafile) : sg(){
+Map::Map(int n, string namafile, int maxengi) : sg(){
 
     fstream mapfile;
     mapfile.open(namafile,ios::in);
@@ -15,7 +15,7 @@ Map::Map(int n, string namafile) : sg(){
     }
     wildEngi.reserve(10);
 
-    while (wildEngi.size() < 5){
+    while (wildEngi.size() < maxengi){
         addEngi();
     }
 

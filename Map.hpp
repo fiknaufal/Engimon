@@ -10,7 +10,7 @@ enum gameState {Jalan, Battle, Bag, Exit};
 
 class Map{
     public:
-        Map(int n, string namafile);
+        Map(int n, string namafile, int maxengi);
         ~Map();
 
         void show();
