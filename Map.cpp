@@ -20,7 +20,7 @@ Map::Map(int n, string namafile) : sg(){
     }
 
     Firemon f(3000, 0, 0);
-    Electricmon e(3000, 0, 0);
+    Icemon e(3000, 0, 0);
     player.addEngimon(f);
     player.addEngimon(e);
     level = n;
@@ -82,16 +82,31 @@ void Map::gameFlow(){
             while (state == Bag){
                 cout << "--- BAG ---" << endl;
                 cout << "Available Commands:" << endl;
-                cout << "1. engimons: show engimons\n2. skillItems: show skill items\n3. chooseActive: pilih active engimon\n4. breed: Breed Engimon\n5.  close: close bag" << endl;
+                cout << "1. engimons: show engimons\n2. skillItems: show skill items\n3. chooseActive: pilih active engimon\n4. breed: Breed Engimon\n5. learn: Learn Skill\n6. close: close bag" << endl;
                 cout << "-----------" << endl;
                 cout << "command: ";
                 string cmdbag;
                 cin >> cmdbag;
                 cout << "\n";
                 if (cmdbag == "engimons"){
-                    player.showEngimonList();
+                    bool keluar = false;
+                    while (!keluar){
+                        player.showEngimonList();
+                        cout << "Ketik -1 untuk kembali ke bag\nCek Engimon dengan nomor: ";
+                        int idx;
+                        cin >> idx;
+                        if (idx == -1){
+                            keluar = true;
+                        } else{
+                            cout << endl;
+                            player.showEngimon(idx-1);
+                        }
+                        cout << endl;
+                    }
+
                 }else if(cmdbag == "skillItems"){
                     player.showSkillItemList();
+                    cout << endl;
                 }else if(cmdbag == "chooseActive"){
                     player.showEngimonList();
                     cout << "Pilih Active Engimon dengan nomor: " ;
@@ -99,6 +114,7 @@ void Map::gameFlow(){
                     cin >> idx;
                     cout << "\n";
                     player.setActiveEngi(idx-1);
+                    cout << endl;
                 }else if (cmdbag == "breed"){
                     player.showEngimonList();
                     cout << "Pilih Engimon 1: " ;
@@ -109,11 +125,24 @@ void Map::gameFlow(){
                     cin >> idx2;
                     cout << "\n";
                     player.breedEngimon(idx1-1, idx2-1);
+                    cout << endl;
+                }else if(cmdbag == "learn"){
+                    player.showSkillItemList();
+                    cout << "Pilih nomor skill item: ";
+                    int idxsi;
+                    cin >> idxsi;
+                    player.showEngimonList();
+                    cout << "Pilih nomor engimon yang akan dipelajari: ";
+                    int idxengi;
+                    cin >> idxengi;
+                    player.useSkillItem(idxsi-1, idxengi-1);
+                    cout << endl;
                 }
                 else if (cmdbag == "close"){
                     state = Jalan;
                 }else{
                     cout << "Command tidak dikenali" << endl;
+                    cout << endl;
                 }
             }
 
@@ -190,26 +219,22 @@ int Map::idSurroundEnemy(){
 
 void Map::show(){
     char maps[mapMatrix.size()][mapMatrix[0].length()];
-    cout << "masuk" << endl;
     for (int i = mapMatrix.size()-1; i >= 0; i--){
         for (int j = 0; j < mapMatrix[0].length(); j++){
             maps[i][j] = mapMatrix[i][j];
         }
     }
-    cout << "masuk" << endl;
     maps[player.getPlayerPos().getY()][player.getPlayerPos().getX()] = 'P';
     maps[player.getActivePos().getY()][player.getActivePos().getX()] = 'X';
     for(int i = 0; i < wildEngi.size(); i++){
         maps[wildEngi[i].getEngimonPos().getY()][wildEngi[i].getEngimonPos().getX()] = wildEngi[i].getMapSymbol(level);
     }
-    cout << "masuk" << endl;
     for (int i = mapMatrix.size()-1; i >= 0; i--){
         for (int j = 0; j < mapMatrix[0].length(); j++){
             cout << maps[i][j];
         }
         cout << endl;
     }
-    cout << "masuk" << endl;
 }
 
 void Map::addEngi(){

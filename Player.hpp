@@ -31,8 +31,10 @@ public:
     void showEngimonList();
     void showSkillItemList();
     void showActiveEngimon();
+    void showEngimon(int idx);
     void setActiveEngi(int);
     void petEngi();
+    void useSkillItem(int idxsi, int idxengi);
     //int checkBattle(Engimon e[]);
     void breedEngimon(int idxA, int idxB);
     bool battle(Engimon e);

@@ -34,7 +34,7 @@ Engimon::Engimon(const Engimon& other) {
     sound = other.sound;
     species = other.species;
     engimonPos = other.engimonPos;
-    skill = other.skill;
+    this->skill = other.skill;
 }
 
 Engimon::~Engimon(){}
@@ -47,7 +47,7 @@ bool Engimon::addSkill(const Skill& sk){
     if (skill.size() < 4){
         for (int i = 0; i < skill.size(); i++){
             if (sk == skill[i]){
-                cout << "Skill sudah dipelajari" << endl;
+                cout << "Skill sudah dipelajari\n" << endl;
                 return false;
             }
         }
@@ -55,8 +55,15 @@ bool Engimon::addSkill(const Skill& sk){
         return true;
     }
     else{
-        cout << "Skill sudah penuh" << endl;
-        return false;
+        cout << "Skill sudah penuh\n" << endl;
+        this->printSkills();
+        cout << "Pilih nomor skill yang ingin dihapus: ";
+        int idxskill;
+        cin >> idxskill;
+        cout << skill[idxskill-1].getSkillName() << " dihapus!" << endl;
+        skill.erase(skill.begin() + (idxskill-1));
+        skill.push_back(sk);
+        return true;
     }
 }
 
@@ -123,6 +130,7 @@ void Engimon::printData(){
     cout << "experience: " << exp%100 << endl;
     cout << "Cumulative Experience: " << cumulativeExp << endl;
     printSkills();
+    cout << endl;
 }
 
 void Engimon::printSkills(){

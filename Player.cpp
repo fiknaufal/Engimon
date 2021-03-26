@@ -23,6 +23,10 @@ void Player::showActiveEngimon(){
     inventoryE.getVector()[idActiveEngimon].printData();
 }
 
+void Player::showEngimon(int idx){
+    inventoryE.getVector()[idx].printData();
+}
+
 void Player::Move(const string &c){
     inventoryE.getVector()[idActiveEngimon].setEngimonPos(playerPos.getX(), playerPos.getY());
     if (c == "w"){
@@ -119,7 +123,7 @@ void Player::showEngimonList(){
     int j = 1;
     cout << "List of Engimon" << endl;
     for(auto i = inventoryE.getVector().begin(); i!= inventoryE.getVector().end(); ++i){
-        cout << j << ". " << i->getName() << " " << i->getSpecies() << " " << i->getLevel()<< endl;
+        cout << j << ". " << i->getName() << " " << i->getSpecies() << " lv." << i->getLevel()<< endl;
         j++;
     }
 }
@@ -133,7 +137,13 @@ void Player::showSkillItemList(){
     }
 }
 
+void Player::useSkillItem(int idxsi, int idxengi){
+    inventoryS.getVector()[idxsi].learnSkill(inventoryE.getVector()[idxengi]);
+    updateSkillItem();
+}
+
 void Player::setActiveEngi(int i){
+    inventoryE.getVector()[idActiveEngimon].setEngimonPos(-1,-1);
     if (i < inventoryE.getSize()){
         idActiveEngimon = i;
     }
@@ -185,7 +195,7 @@ void Player::breedEngimon (int idxA, int idxB) {
     // Cek level ortu
     if ((inventoryE.getVector()[idxA].getLevel() < 30) && (inventoryE.getVector()[idxB].getLevel() < 30))
         // Bingung antara throw atau munculin output aj
-        cout << "Level ortu g cukup" << endl;
+        cout << "Level Engimon belum cukup" << endl;
 
     // Cek muat atau g list engimon player (Blom bise diimplementasiin)
     else if (this->getInvCount() > maxInv)
