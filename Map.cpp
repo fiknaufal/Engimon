@@ -14,7 +14,6 @@ Map::Map(int n, string namafile, int maxengi) : sg(){
         }
     }
     wildEngi.reserve(10);
-
     while (wildEngi.size() < maxengi){
         addEngi();
     }
@@ -238,7 +237,6 @@ void Map::show(){
 }
 
 void Map::addEngi(){
-    if(wildEngi.size() < 10){
         int r = (rand()%30 + 1)*100;
         int x = rand()%mapMatrix[0].length(), y = rand()%mapMatrix.size();
         Engimon* w;
@@ -286,7 +284,6 @@ void Map::addEngi(){
             }
             wildEngi.push_back(*w);
         }
-    }
 }
 
 void Map::randomiseEnemyMovement(){

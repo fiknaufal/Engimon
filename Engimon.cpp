@@ -250,7 +250,7 @@ Engimon(name, p1name, p2name, p1spc, p2spc,"Electricmon", exp, Electric, None, p
 }
 
 Electricmon::Electricmon(int x,int px, int py) :
-Engimon("Wild Electricmon", "Electricmon Ibu", "Electricmon Ibu juga", "Electricmon", "Electricmon", "Electricmon", x, Electric, None, py, px, "AYAYAYAYYY"){
+Engimon("Wild Electricmon", "Electricmon Ibu", "Electricmon Ibu juga", "Electricmon", "Electricmon", "Electricmon", x, Electric, None, px, py, "AYAYAYAYYY"){
     skillgacha sg;
     skill = sg.getSkillGen(Electric, None);
 }
