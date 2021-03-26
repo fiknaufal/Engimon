@@ -32,7 +32,6 @@ Map::~Map(){
 
 void Map::gameFlow(){
     string cmd;
-    srand(time(0));
     while (state != Exit && !player.lose()){
         if (isBattle()){
             this->state = Battle;

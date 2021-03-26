@@ -4,7 +4,6 @@
 #include "skillgacha.hpp"
 #include <stdlib.h>
 #include <vector>
-#include <time.h>
 
 enum gameState {Jalan, Battle, Bag, Exit};
 

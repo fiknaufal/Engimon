@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
+#include <time.h>
 #include "Map.hpp"
 
 int main(){
+    srand(time(0));
     cout << "  _____ _            _____             _" << endl;
     cout << " |_   _| |__   ___  | ____|_ __   __ _(_)_ __ ___   ___  _ __" << endl;
     cout << "   | | | '_ \\ / _ \\ |  _| | '_ \\ / _` | | '_ ` _ \\ / _ \\| '_ \\" << endl;
