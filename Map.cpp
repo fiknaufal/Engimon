@@ -10,7 +10,7 @@ Map::Map(int n, string namafile) : sg(){
     if (mapfile.is_open()){
         string line;
         while(getline(mapfile, line)){
-            mapMatrix.push_back(line);
+            mapMatrix.insert(mapMatrix.begin(), line);
         }
     }
     wildEngi.reserve(10);
